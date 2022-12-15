@@ -1,0 +1,100 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}
+    ویرایش اطلاعات
+{% endblock %}
+
+{% block content %}
+
+    <main>
+
+        <section class="py-5">
+            <div class="container">
+                <div class="row d-flex justify-content-center">
+
+                    <div class="col-sm-9 col-md-11 col-lg-10">
+
+                        <div class="user-panel custom-bg">
+
+                            {% for field in form %}
+                                {% if field.errors %}
+                                    <div align="center">
+                                        <div class="alert alert-danger alert-dismissible fade show w-50" role="alert">
+                                            {{ field.errors }}
+                                            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                                <span aria-hidden="true">&times;</span>
+                                            </button>
+                                        </div>
+                                    </div>
+                                {% endif %}
+                            {% endfor %}
+
+                            <form method="post" enctype="multipart/form-data">
+                                {% csrf_token %}
+                                <div class="user-panel-box">
+                                    <div class="user-panel-profile">
+
+                                        {% if request.user.image %}
+                                            <img src="{{ request.user.image.url }}" alt="">
+                                        {% else %}
+                                            <img src="{% static 'image/User_Default.jpg' %}"
+                                                 alt="">
+                                        {% endif %}
+
+                                    </div>
+
+                                    <div class="change-profile-btn">
+                                        <a onclick="choose_picture()" class="btn custom-btn"> تغییر عکس پروفایل </a>
+                                        <button hidden>{{ form.image }}</button>
+                                    </div>
+
+                                    {# New #}
+                                    <div class="change-password-btn">
+                                        <a class="btn custom-btn" href="{% url 'account:change_password' %}"> تغییر
+                                            گذرواژه </a>
+                                    </div>
+
+
+                                    <!-- item -->
+                                    <div class="user-panel-field">
+                                        <i class="fa fa-user"></i>
+                                        {{ form.fullname }}
+                                    </div>
+                                    <!-- item -->
+                                    <div class="user-panel-field">
+                                        <i class="fa fa-envelope"></i>
+                                        {{ form.email }}
+                                    </div>
+                                    <!-- item -->
+                                    <div class="user-panel-field">
+                                        <i class="fa fa-phone"></i>
+                                        {{ form.phone }}
+                                    </div>
+
+                                    <!-- item -->
+                                    <div hidden class="user-panel-field">
+                                        <i class="fa fa-phone"></i>
+                                    </div>
+
+                                    {{ form.bio }}
+
+                                </div>
+
+                                <div class="d-flex justify-content-center mt-3 ">
+                                    <button type="submit" class="btn custom-btn w-50">اعمال تغییرات
+                                    </button>
+                                </div>
+
+
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+
+    </main>
+{% endblock %}
+

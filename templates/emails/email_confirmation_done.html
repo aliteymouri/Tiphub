@@ -1,0 +1,24 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}
+    خوش آمدید
+{% endblock %}
+
+{% block content %}
+    <main>
+        <section class="py-5 mb-5 mt-5">
+            <div class="container">
+                <div class="d-flex align-items-center justify-content-between mb-3">
+                    <alert class="alert alert-success">
+                        <h2 class="title-section"> حساب کاربری شما با موفقیت فعال شد </h2>
+                    </alert>
+                </div>
+                <div>
+                    <a class="btn btn-primary" href="{% url 'home:home' %}"> رفتن به صفحه اصلی</a>
+                    <a class="btn btn-primary" href="{% url 'account:user_panel' %}"> رفتن به پنل کاربری </a>
+                </div>
+            </div>
+        </section>
+    </main>
+{% endblock %}

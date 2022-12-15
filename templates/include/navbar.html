@@ -1,0 +1,15 @@
+{% load static %}
+
+<nav class="nav-menu nav-menu-pc  d-none d-md-flex px-4" id="navbar">
+    {% for i in categories.all %}
+        <li id="" class="mx-3 menu-item"><a href="" class="nav-menu-item ">{{ i.title }} </a>
+            <ul class="sub-menu">
+
+                {% for sub in i.subcategories.all %}
+                    <a href="{% url 'video:category_detail' sub.slug %}">{{ sub.title }}</a>
+                {% endfor %}
+
+            </ul>
+        </li>
+    {% endfor %}
+</nav>
