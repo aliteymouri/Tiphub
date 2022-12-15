@@ -21,18 +21,18 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/4.1/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = config('SECRET_KEY')
+SECRET_KEY = "django-insecure-4)ouu#p2$t+fi$m)yrh79$q-b&7o9a#0&-x9(j)vbz5*&z@&fv"
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = config('DEBUG')
+DEBUG = True
 
 ALLOWED_HOSTS = []
 
 # Application definition
 
 INSTALLED_APPS = [
-    'admin_persian',
-    'django.contrib.admin',
+    'admin_persian', # NEW
+    'django.contrib.admin', 
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
@@ -142,8 +142,8 @@ AUTH_USER_MODEL = 'Account.User'
 # https://docs.djangoproject.com/en/4.1/howto/static-files/
 
 STATIC_URL = 'static/'
-MEDIA_ROOT = os.path.join(BASE_DIR, "uploads")
-MEDIA_URL = '/uploads/'
+MEDIA_ROOT = os.path.join(BASE_DIR, "media")
+MEDIA_URL = '/media/'
 STATICFILES_DIRS = [os.path.join(BASE_DIR, 'statics')]
 
 # Default primary key field type
@@ -153,15 +153,13 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 EMAIL_USE_TLS = True
 EMAIL_HOST = 'smtp.gmail.com'
-EMAIL_HOST_USER = config("EMAIL_HOST_USER")
-EMAIL_HOST_PASSWORD = config("EMAIL_HOST_PASSWORD")
+EMAIL_HOST_USER = "aliteymr@gmail.com"
+EMAIL_HOST_PASSWORD = "tsgtfddnbxjlslit"
 EMAIL_PORT = 587
 
-RECAPTCHA_PUBLIC_KEY = config("RECAPTCHA_PUBLIC_KEY")
-RECAPTCHA_PRIVATE_KEY = config("RECAPTCHA_PRIVATE_KEY")
+RECAPTCHA_PUBLIC_KEY = "6LdvNb4hAAAAAH3O-_l4RDiwfazZVw_vGKqQRDhT"
+RECAPTCHA_PRIVATE_KEY = "6LdvNb4hAAAAAHpQWOTu7LWsG9DqsGg9R4K1dFqi"
 
-SOCIAL_AUTH_GOOGLE_OAUTH2_KEY = config("SOCIAL_AUTH_GOOGLE_OAUTH2_KEY")
-SOCIAL_AUTH_GOOGLE_OAUTH2_SECRET = config("SOCIAL_AUTH_GOOGLE_OAUTH2_SECRET")
+SOCIAL_AUTH_GOOGLE_OAUTH2_KEY = "Your Key"
+SOCIAL_AUTH_GOOGLE_OAUTH2_SECRET = "Your Secret"
 
-# SOCIAL_AUTH_GITHUB_KEY = 'a153bde136a5bf5a7a3f'
-# SOCIAL_AUTH_GITHUB_SECRET = 'cf29a546d9b43a11eb778fc70b35f503aceb9ce5'
