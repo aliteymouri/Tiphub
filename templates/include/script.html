@@ -74,6 +74,21 @@
         }
     }
 </script>
+<script>
+    function Warning_Like() {
+        Swal.fire({
+            title: "برای اضافه کردن دوره به مورد علاقه ها وارد حساب کاربری خود شوید",
+            confirmButtonColor: '#112031',
+            confirmButtonText: 'باشه',
+
+            showClass: {
+                popup: 'animate__animated animate__fadeInDown'
+            },
+        }).then(function () {
+            location.href = "{% url 'account:sign_in' %}";
+        })
+    }
+</script>
 
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script> {# NEW #}
 <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js"

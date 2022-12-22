@@ -8,8 +8,8 @@ class HomeView(TemplateView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context['videos'] = Video.objects.all().order_by('views')[:6]
         context['recent_videos'] = Video.objects.all().order_by('-updated_on', '-created_at')[:6]
+        context['videos'] = Video.objects.all().order_by('views')[:6]
         return context
 
 

@@ -86,7 +86,7 @@
                                  aria-labelledby="dropdownMenuButton">
                                 {% if request.user.is_authenticated %}
                                     <a class="" href="{% url 'account:user_panel' %}"> پروفایل</a>
-                                    <a class="" href="{% url 'video:favorites' %}"> مورد علاقه ها</a>
+                                    <a class="" href="{% url 'video:favorites' %}">علاقه مندی ها</a>
                                     <hr>
                                     <a class="" href="{% url 'account:logout' %}">خروج از حساب</a>
                                 {% else %}
@@ -116,7 +116,7 @@
 
                                 {% if request.user.is_authenticated %}
                                     <a class="" href="{% url 'account:user_panel' %}"> پروفایل </a>
-                                    <a class="" href="{% url 'video:favorites' %}"> مورد علاقه ها</a>
+                                    <a class="" href="{% url 'video:favorites' %}">علاقه مندی ها</a>
                                     <hr>
                                     <a class="" href="{% url 'account:logout' %}"> خروج از حساب </a>
                                 {% else %}

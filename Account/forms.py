@@ -82,7 +82,7 @@ class SignUpForm(UserCreationForm):
         widget=forms.TextInput({'class': "email-input", "placeholder": "شماره تماس", 'maxlength': 11}),
         validators=[start_with_09]
     )
-    captcha = ReCaptchaField(widget=ReCaptchaV2Checkbox)
+    captcha = ReCaptchaField(widget=ReCaptchaV2Checkbox, error_messages={'required': 'اعتبار سنجی Recaptcha انجام نشد'})
 
 
 class EditProfileForm(forms.ModelForm):
@@ -107,7 +107,7 @@ class EditProfileForm(forms.ModelForm):
         fields = ('email', 'fullname', 'phone', 'image', 'bio')
 
 
-# I Just Customize The Placeholder And Error of PasswordChangeForm
+# I just customize placeholder and error of PasswordChangeForm
 
 class ChangePasswordForm(PasswordChangeForm):
     def __init__(self, user, *args, **kwargs):
