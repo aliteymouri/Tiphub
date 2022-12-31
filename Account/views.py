@@ -64,12 +64,6 @@ class SignUpView(AuthenticatedMixin, CreateView):
         return super(SignUpView, self).get(*args, **kwargs)
 
 
-class LogoutView(View):
-    def get(self, req):
-        logout(req)
-        return redirect('account:sign_in')
-
-
 class Activate(View):
     def get(self, req, uidb64, token, *args, **kwargs):
         try:
