@@ -105,7 +105,7 @@
 
                                 {% if request.user.is_authenticated %}
 
-                                    <form action="" method="post">
+                                    <form id="comment-form" method="post">
                                         {% csrf_token %}
 
                                         <input id="parent_id" type="hidden" name="parent_id" value="">
@@ -301,6 +301,36 @@
 
     </main>
 
+    <script src="https://code.jquery.com/jquery-3.5.1.js"
+            integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc="
+            crossorigin="anonymous"></script>
+
+
+    <script type="text/javascript">
+        $(document).on('submit', '#comment-form', function (e) {
+            e.preventDefault();
+            $.ajax({
+                type: 'POST',
+                url: '{% url "video:video_detail" object.slug %}',
+                data:
+                    {
+                        text: $("#get_fullname").val(),
+                        parent_id: $("#parent_id").val(),
+                        csrfmiddlewaretoken: $('input[name=csrfmiddlewaretoken]').val()
+                    },
+                success: function () {
+                    Swal.fire({
+                        text: 'عملیات با موفقیت انجام شد',
+                        icon: 'success',
+                        confirmButtonText: 'باشه',
+                        confirmButtonColor: '#112031',
+                    }).then(function () {
+                        location.reload()
+                    })
+                }
+            })
+        });
+    </script>
 
     <script>
         function Warning_Like() {
