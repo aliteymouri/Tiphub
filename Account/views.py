@@ -5,7 +5,7 @@ from django.contrib.auth import logout, authenticate, login
 from django.contrib.sites.shortcuts import get_current_site
 from .mixins import RequiredLoginMixin, AuthenticatedMixin
 from django.utils.encoding import force_bytes, force_str
-from django.views.generic import CreateView, UpdateView
+from django.views.generic import CreateView, UpdateView, FormView
 from django.template.loader import render_to_string
 from django.shortcuts import render, redirect
 from .tokens import account_activation_token
@@ -86,14 +86,19 @@ class UserPanelView(RequiredLoginMixin, View):
         return render(req, 'account/user_panel.html', {'instance': req.user})
 
 
-class EditProfileView(RequiredLoginMixin, UpdateView):
-    model = User
+class EditProfileView(RequiredLoginMixin, View):
     form_class = EditProfileForm
     template_name = 'account/edit_profile.html'
-    success_url = reverse_lazy('account:user_panel')
 
-    def get_object(self, *args, **kwargs):
-        return self.request.user
+    def get(self, req):
+        form = self.form_class(instance=req.user)
+        return render(req, self.template_name, {"form": form})
+
+    def post(self, req):
+        form = self.form_class(req.POST, instance=req.user)
+        if form.is_valid():
+            form.save()
+        return render(req, self.template_name, {"form": form})
 
 
 class ResetPasswordView(PasswordResetView):

@@ -30,7 +30,7 @@
                                 {% endif %}
                             {% endfor %}
 
-                            <form method="post" enctype="multipart/form-data">
+                            <form method="post" id="edit_profile_form" enctype="multipart/form-data">
                                 {% csrf_token %}
                                 <div class="user-panel-box">
                                     <div class="user-panel-profile">
@@ -82,8 +82,7 @@
                                 </div>
 
                                 <div class="d-flex justify-content-center mt-3 ">
-                                    <button type="submit" class="btn custom-btn w-50">اعمال تغییرات
-                                    </button>
+                                    <button type="submit" class="btn custom-btn w-50">اعمال تغییرات</button>
                                 </div>
 
 
@@ -97,4 +96,3 @@
 
     </main>
 {% endblock %}
-

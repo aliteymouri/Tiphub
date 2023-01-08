@@ -46,7 +46,7 @@
 </script>
 <script>
     function choose_picture() {
-        document.getElementById('id_image').click()
+        document.getElementById('image').click()
     }
 </script>
 
@@ -88,6 +88,40 @@
             location.href = "{% url 'account:sign_in' %}";
         })
     }
+</script>
+
+
+<script src="https://code.jquery.com/jquery-3.5.1.js"
+        integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc="
+        crossorigin="anonymous"></script>
+
+<script type="text/javascript">
+    $(document).on('submit', '#edit_profile_form', function (e) {
+        e.preventDefault();
+        $.ajax({
+            type: 'POST',
+            url: '{% url "account:edit_profile" %}',
+            data:
+                {
+                    email: $("#email").val(),
+                    fullname: $("#fullname").val(),
+                    image: $("#image").val(),
+                    phone: $("#phone").val(),
+                    bio: $("#bio").val(),
+                    csrfmiddlewaretoken: $('input[name=csrfmiddlewaretoken]').val()
+                },
+            success: function () {
+                Swal.fire({
+                    text: 'عملیات با موفقیت انجام شد',
+                    icon: 'success',
+                    confirmButtonText: 'باشه',
+                    confirmButtonColor: '#112031',
+                }).then(function () {
+                    location.href = "{% url 'account:user_panel' %}";
+                })
+            }
+        })
+    });
 </script>
 
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script> {# NEW #}

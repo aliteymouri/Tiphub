@@ -87,20 +87,20 @@ class SignUpForm(UserCreationForm):
 
 class EditProfileForm(forms.ModelForm):
     email = forms.EmailField(
-        widget=forms.EmailInput({'class': "email-input", "placeholder": "پست الکترونیک"}),
+        widget=forms.EmailInput({'class': "email-input", "placeholder": "پست الکترونیک", "id": "email"}),
     )
     fullname = forms.CharField(
-        widget=forms.TextInput({'class': "email-input", "placeholder": "نام و نام خانوادگی"}),
+        widget=forms.TextInput({'class': "email-input", "placeholder": "نام و نام خانوادگی", "id": "fullname"}),
     )
     phone = forms.CharField(
-        widget=forms.TextInput({'class': "email-input", "placeholder": "شماره تماس", 'maxlength': 11}),
+        widget=forms.TextInput({'class': "email-input", "placeholder": "شماره تماس", 'maxlength': 11, "id": "phone"}),
         validators=[start_with_09]
     )
     bio = forms.CharField(required=False,
                           widget=forms.Textarea(
-                              {'class': "form-control", "placeholder": "بیوگرافی", "rows": 3, })
+                              {'class': "form-control", "placeholder": "بیوگرافی", "rows": 3, "id": "bio"})
                           )
-    image = forms.ImageField(required=False, )
+    image = forms.ImageField(required=False, widget=forms.FileInput({'id': 'image'}))
 
     class Meta:
         model = User
