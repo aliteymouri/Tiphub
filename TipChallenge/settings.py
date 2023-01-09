@@ -50,6 +50,7 @@ INSTALLED_APPS = [
     "social_django",
     "hitcount",
     "captcha",
+    "ckeditor",
 
 ]
 
@@ -162,3 +163,10 @@ RECAPTCHA_PRIVATE_KEY = "6LdvNb4hAAAAAHpQWOTu7LWsG9DqsGg9R4K1dFqi"
 
 SOCIAL_AUTH_GOOGLE_OAUTH2_KEY = "YOUR KEY"
 SOCIAL_AUTH_GOOGLE_OAUTH2_SECRET = "YOUR SECRET"
+
+
+CKEDITOR_CONFIGS = {
+    'default': {
+        'toolbar': 'full',
+    },
+}

@@ -1,5 +1,6 @@
 from django.contrib.contenttypes.fields import GenericRelation
 from persiantools.jdatetime import JalaliDate
+from ckeditor.fields import RichTextField
 from django.utils.text import slugify
 from hitcount.models import HitCount
 from django.utils import timezone
@@ -70,7 +71,7 @@ class Video(models.Model):
     publisher = models.ForeignKey(User, on_delete=models.CASCADE, verbose_name="منتشر کننده")
     category = models.ManyToManyField(SubCategory, related_name='videos', verbose_name="دسته بندی ویدیو")
     video = models.FileField("آپلود ویدیو", upload_to='videos/')
-    description = models.TextField("درباره ویدئو")
+    description = RichTextField("درباره ویدئو")
     video_cover = models.ImageField("بنر ویدیو", upload_to='banner')
     tags = models.ManyToManyField(Tag, related_name='tags', verbose_name='برچسب ها')
     time = models.CharField("تایم ویدیو", blank=True, null=True, max_length=15)
