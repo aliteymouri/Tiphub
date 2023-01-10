@@ -5,7 +5,7 @@ from django.contrib.auth import logout, authenticate, login
 from django.contrib.sites.shortcuts import get_current_site
 from .mixins import RequiredLoginMixin, AuthenticatedMixin
 from django.utils.encoding import force_bytes, force_str
-from django.views.generic import CreateView, UpdateView, FormView
+from django.views.generic import CreateView, UpdateView, FormView, TemplateView
 from django.template.loader import render_to_string
 from django.shortcuts import render, redirect
 from .tokens import account_activation_token
@@ -118,3 +118,7 @@ class ChangePasswordView(PasswordChangeView):
     template_name = 'account/change_password.html'
     success_url = reverse_lazy('account:user_panel')
     form_class = ChangePasswordForm
+
+
+class WhyTipHubView(TemplateView):
+    template_name = 'account/why-tiphub.html'

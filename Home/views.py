@@ -13,5 +13,5 @@ class HomeView(TemplateView):
         return context
 
 
-def error_404_view(req, exception):
-    return render(req, 'home/404.html')
+# def error_404_view(req, exception):
+#     return render(req, 'home/404.html')

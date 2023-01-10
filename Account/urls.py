@@ -24,4 +24,6 @@ urlpatterns = [
     path('reset_password/complete/',
          auth_views.PasswordResetCompleteView.as_view(template_name="passwords/password_reset_done.html"),
          name="password_reset_complete"),
+
+    path('why_tiphub', views.WhyTipHubView.as_view(), name='why_tiphub')
 ]

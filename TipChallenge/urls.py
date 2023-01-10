@@ -31,7 +31,7 @@ urlpatterns = [
                   path('', include('social_django.urls', namespace='social')),  # Django_Social
               ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 # 404 page
-handler404 = 'Home.views.error_404_view'
+# handler404 = 'Home.views.error_404_view'
 
 admin.site.unregister(Association)
 admin.site.unregister(Nonce)
