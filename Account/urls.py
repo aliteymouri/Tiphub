@@ -25,5 +25,6 @@ urlpatterns = [
          auth_views.PasswordResetCompleteView.as_view(template_name="passwords/password_reset_done.html"),
          name="password_reset_complete"),
 
-    path('why_tiphub', views.WhyTipHubView.as_view(), name='why_tiphub')
+    path('why_tiphub', views.WhyTipHubView.as_view(), name='why_tiphub'),
+    path('privacy_policy', views.PrivacyPolicyView.as_view(), name='privacy_policy'),
 ]
