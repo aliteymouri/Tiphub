@@ -123,3 +123,7 @@ class ChangePasswordView(PasswordChangeView):
 
 class WhyTipHubView(TemplateView):
     template_name = 'account/why-tiphub.html'
+
+
+class PrivacyPolicyView(TemplateView):
+    template_name = 'account/privacy-policy.html'
