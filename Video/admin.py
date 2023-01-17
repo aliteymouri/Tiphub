@@ -2,7 +2,6 @@ from django.contrib import admin
 from . import models
 
 
-
 @admin.register(models.Video)
 class VideoAdmin(admin.ModelAdmin):
     list_display = ("__str__", "is_active", "get_jalali_date")
@@ -35,15 +34,17 @@ class CommentAdmin(admin.ModelAdmin):
     actions = ['is_active']
 
 
-@admin.register(models.Favorite)
+@admin.register(models.Like)
 class FavoriteAdmin(admin.ModelAdmin):
     list_display = ("__str__",)
     list_filter = ("created_at", "video")
 
 
-@admin.register(models.Tag)
+@admin.register(models.Favorite)
 class LikeAdmin(admin.ModelAdmin):
     list_display = ("__str__",)
 
 
-
+@admin.register(models.Tag)
+class LikeAdmin(admin.ModelAdmin):
+    list_display = ("__str__",)

@@ -49,7 +49,7 @@
                                     </div>
                                     <div>
 
-                                        <span id="count_like">{{ object.favorites.all.count }}</span>
+                                        <span id="count_like">{{ object.likes.count }}</span>
 
                                         {% if request.user.is_authenticated %}
                                             {% if is_like %}
@@ -75,10 +75,32 @@
 
                                     </div>
 
+                                    <div class="mx-3">
+
+                                        {% if request.user.is_authenticated %}
+                                            {% if is_fav %}
+
+                                                <a onclick="favorite('{{ object.slug }}','{{ object.id }}')"> <i
+                                                        class="fa fa-bookmark" type='button'
+                                                        id="fav_button" aria-hidden="true"></i></a>
+
+                                            {% else %}
+
+                                                <a onclick="favorite('{{ object.slug }}','{{ object.id }}')"> <i
+                                                        class="fa fa-bookmark-o" type='button'
+                                                        id="fav_button" aria-hidden="true"></i></a>
+
+                                            {% endif %}
+
+                                        {% endif %}
+
+                                    </div>
 
                                 </div>
 
                             </div>
+
+
                             <!-- description -->
                             <div id="scroll" class="border-bottom pb-3">
                                 <h4 class="my-3"> توضیحات </h4>

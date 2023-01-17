@@ -10,7 +10,7 @@ from django.template.loader import render_to_string
 from django.shortcuts import render, redirect
 from .tokens import account_activation_token
 from django.core.mail import EmailMessage
-from django.http import HttpResponse
+from django.http import HttpResponse, JsonResponse
 from django.urls import reverse_lazy
 from django.views import View
 from .models import User
@@ -98,6 +98,7 @@ class EditProfileView(RequiredLoginMixin, View):
         form = self.form_class(req.POST, instance=req.user)
         if form.is_valid():
             form.save()
+            return JsonResponse({"response":'changed'})
         return render(req, self.template_name, {"form": form})
 
 

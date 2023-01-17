@@ -1,7 +1,7 @@
 from Notification.models import PersonalNotification
-from Video.models import Video, Comment, Favorite
+from Video.models import Video, Comment, Like, Favorite
 from django.views.generic import ListView, View
-from django.shortcuts import redirect, render
+from django.shortcuts import redirect, render, get_object_or_404
 from Account.mixins import RequiredLoginMixin
 from hitcount.views import HitCountDetailView
 from django.core.paginator import Paginator
@@ -48,8 +48,13 @@ class VideoDetailView(HitCountDetailView):
         page = self.request.GET.get("page")
         context["comments"] = paginator.get_page(page)
 
-        if Favorite.objects.filter(video__slug=self.object.slug, user_id=self.request.user.id).exists():
+        if Like.objects.filter(video__slug=self.object.slug, user_id=self.request.user.id).exists():
             context['is_like'] = True
+
+        if Favorite.objects.filter(video__slug=self.object.slug, user_id=self.request.user.id).exists():
+            context['is_fav'] = True
+        else:
+            context['is_fav'] = False
         return context
 
 
@@ -87,20 +92,31 @@ class RemoveCommentView(View):
         return redirect('home:home')
 
 
-def like(req, slug, pk):
-    try:
-        like = Favorite.objects.get(video__slug=slug, user_id=req.user.id)
-        like.delete()
-        return JsonResponse({"response": "unliked"})
-
-    except:
-        Favorite.objects.create(video_id=pk, user_id=req.user.id)
-        return JsonResponse({"response": "liked"})
-
-
 class FavoriteView(RequiredLoginMixin, View):
     template_name = "video/favorite.html"
 
     def get(self, req, **kwargs):
         favorites = Video.objects.filter(favorites__user=req.user)
         return render(req, self.template_name, {"favorites": favorites})
+
+
+def like(req, slug, pk):
+    try:
+        like = Like.objects.get(video__slug=slug, user_id=req.user.id)
+        like.delete()
+        return JsonResponse({"response": "unliked"})
+
+    except:
+        Like.objects.create(video_id=pk, user_id=req.user.id)
+        return JsonResponse({"response": "liked"})
+
+
+def favorite(req, slug, pk):
+    try:
+        fav = Favorite.objects.get(video__slug=slug, user_id=req.user.id)
+        fav.delete()
+        return JsonResponse({"response": "deleted"})
+
+    except:
+        Favorite.objects.create(video_id=pk, user_id=req.user.id)
+        return JsonResponse({"response": "added"})

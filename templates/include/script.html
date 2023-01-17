@@ -110,15 +110,19 @@
                     bio: $("#bio").val(),
                     csrfmiddlewaretoken: $('input[name=csrfmiddlewaretoken]').val()
                 },
-            success: function () {
-                Swal.fire({
-                    text: 'عملیات با موفقیت انجام شد',
-                    icon: 'success',
-                    confirmButtonText: 'باشه',
-                    confirmButtonColor: '#112031',
-                }).then(function () {
-                    location.href = "{% url 'account:user_panel' %}";
-                })
+            success: function (response) {
+                if (response['response'] === 'changed') {
+                    Swal.fire({
+                        text: 'عملیات با موفقیت انجام شد',
+                        icon: 'success',
+                        confirmButtonText: 'باشه',
+                        confirmButtonColor: '#112031',
+                    }).then(function () {
+                        location.href = "{% url 'account:user_panel' %}";
+                    })
+                } else {
+
+                }
             }
         })
     });

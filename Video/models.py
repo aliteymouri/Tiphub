@@ -75,6 +75,7 @@ class Video(models.Model):
     video_cover = models.ImageField("بنر ویدیو", upload_to='banner')
     tags = models.ManyToManyField(Tag, related_name='tags', verbose_name='برچسب ها')
     time = models.CharField("تایم ویدیو", blank=True, null=True, max_length=15)
+    likes_count = models.BigIntegerField("تعداد لایک ها", default=0)
     views = GenericRelation(HitCount, object_id_field='object_pk',
                             related_query_name='hit_count_generic_relation', verbose_name='تعداد بازدید')
     slug = models.SlugField("آدرس اسلاگ", unique=True, allow_unicode=True, null=True, blank=True)
@@ -139,15 +140,29 @@ class Comment(models.Model):
         ordering = ('-created_at',)
 
 
-class Favorite(models.Model):
+class Like(models.Model):
+    video = models.ForeignKey(Video, on_delete=models.CASCADE, related_name="likes", verbose_name="ویدیو")
+    user = models.ForeignKey(User, on_delete=models.CASCADE, related_name="likes", verbose_name="کاربر")
+    created_at = models.DateField("تاریخ ثبت در", auto_now_add=True)
+
+    def __str__(self):
+        return F'  ویدیوی  : {self.video.title} توسط  : {self.user.fullname}'
+
+    class Meta:
+        verbose_name = "لایک "
+        verbose_name_plural = "لایک ها"
+        ordering = ("-created_at",)
+
+
+class Favorite (models.Model):
     video = models.ForeignKey(Video, on_delete=models.CASCADE, related_name="favorites", verbose_name="ویدیو")
     user = models.ForeignKey(User, on_delete=models.CASCADE, related_name="favorites", verbose_name="کاربر")
     created_at = models.DateField("تاریخ ثبت در", auto_now_add=True)
 
     def __str__(self):
-        return F'  ویدیوی  : {self.video.title} / مورد علاقه  : {self.user.fullname}'
+        return F'  ویدیوی  : {self.video.title} توسط  : {self.user.fullname}'
 
     class Meta:
-        verbose_name = "علاقه مندی"
+        verbose_name = "علاقه مندی "
         verbose_name_plural = "علاقه مندی ها"
         ordering = ("-created_at",)
