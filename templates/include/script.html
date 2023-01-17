@@ -73,21 +73,33 @@
             document.getElementById("confirm_pass").type = 'password';
         }
     }
-</script>
-<script>
-    function Warning_Like() {
-        Swal.fire({
-            title: "برای اضافه کردن دوره به مورد علاقه ها وارد حساب کاربری خود شوید",
-            confirmButtonColor: '#112031',
-            confirmButtonText: 'باشه',
 
-            showClass: {
-                popup: 'animate__animated animate__fadeInDown'
-            },
+
+    function Warning_Favorite() {
+        Swal.fire({
+            position: 'top-end-right',
+            icon: 'warning',
+            title: "برای اضافه کردن این آموزش به علاقه مندی ها وارد حساب کاربری خود شوید",
+            confirmButtonText: 'باشه',
+            confirmButtonColor: '#112031',
         }).then(function () {
             location.href = "{% url 'account:sign_in' %}";
         })
     }
+
+    function Warning_Like() {
+        Swal.fire({
+            position: 'top-end-right',
+            icon: 'warning',
+            title: "برای ثبت لایک این آموزش وارد حساب کاربری خود شوید",
+            confirmButtonText: 'باشه',
+            confirmButtonColor: '#112031',
+        }).then(function () {
+            location.href = "{% url 'account:sign_in' %}";
+        })
+    }
+
+
 </script>
 
 

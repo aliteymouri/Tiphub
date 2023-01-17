@@ -6,75 +6,93 @@
 
         <section class="row d-flex align-items-baseline footer-items">
             <div class="col-6 col-sm-6 col-md-3 col-lg-3">
-                <div>
-                    <h6 class="mb-3 text-white"><span class="border-bottom">خدمات مشترکین</span></h6>
-                    <a href="">
-                        <p>راهنمای استفاده</p>
-                    </a>
-                    <a href="">
-                        <p>سوالات متداول </p>
-                    </a>
-                    <a href="">
-                        <p>قوانین و مقررات </p>
-                    </a>
-                    <a href="">
-                        <p>پیشنهاد آموزش </p>
-                    </a>
-                </div>
+                <ul>
+                    <h6 class="mb-3 text-white"><span class="border-bottom">تیپ هاب </span></h6>
+                    <li>
+                        <a href="">
+                            <p> ارتباط با ما </p>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="">
+                            <p> درباره ما </p>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="{% url 'account:why_tiphub' %}">
+                            <p> چرا تیپ هاب </p>
+                        </a>
+                    </li>
+
+
+                </ul>
             </div>
             <div class="col-6 col-sm-6 col-md-3 col-lg-3">
-                <div>
-                    <h6 class="mb-3 text-white"><span class="border-bottom">خدمات مشترکین</span></h6>
-                    <a href="">
-                        <p>راهنمای استفاده</p>
-                    </a>
-                    <a href="">
-                        <p>سوالات متداول </p>
-                    </a>
-                    <a href="{% url 'account:privacy_policy' %}">
-                        <p>قوانین و مقررات </p>
-                    </a>
-                    <a href="">
-                        <p>پیشنهاد آموزش </p>
-                    </a>
-                </div>
+                <ul>
+                    <h6 class="mb-3 text-white"><span class="border-bottom">خدمات تیپ هاب</span></h6>
+                    <li>
+                        <a href="">
+                            <p> نکات پایتونی</p>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="">
+                            <p> نکات جاوااسکریپتی</p>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="">
+                            <p> نکات فلاتری</p>
+                        </a>
+                    </li>
+
+
+                </ul>
             </div>
             <div class="col-6 col-sm-6 col-md-3 col-lg-3">
-                <div>
-                    <h6 class="mb-3 text-white"><span class="border-bottom">خدمات مشترکین</span></h6>
-                    <a href="">
-                        <p>مستندات جنگو</p>
-                    </a>
-                    <a href="">
-                        <p>آموزش دارت</p>
-                    </a>
-                    <a href="">
-                        <p>خلاصه کتاب‌های پایتون</p>
-                    </a>
-                    <a href="">
-                        <p>چند نکته ی پایتونی</p>
-                    </a>
-                </div>
+                <ul>
+                    <h6 class="mb-3 text-white"><span class="border-bottom"> همکاری با ما </span></h6>
+                    <li>
+                        <a href="">
+                            <p> شرایط همکاری</p>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="">
+                            <p> قوانین و مقررات</p>
+                        </a>
+                    </li>
+
+
+                </ul>
             </div>
             <div class="col-6 col-sm-6 col-md-3 col-lg-3">
-                <div>
+                <ul>
                     <h6 class="mb-3 text-white"><span class="border-bottom">خدمات مشترکین</span></h6>
-                    <a href="" class="">
-                        <img src="assets/image/f1.svg" alt="">
-                        اهواز، خیابان نادری، خیابان امیری، کوچه مهرگان، پلاک ۱۴، کد پستی 6381838168
-                    </a>
-                    <a href="" class="">
-                        <img src="assets/image/f2.svg" alt="">
-                        پشتیبانی: 09910549803
-                    </a>
-                    <a href="" class="">
-                        <img src="assets/image/f3.svg" alt="">
-                        30009010
-                    </a>
-                    <a href="" class="">
-                        <img src="assets/image/f4.svg" alt="">
-                        amirhamiri74@gmial.com
-                    </a>
+                    <li>
+                        <a href="" class="">
+                            <img src="assets/image/f1.svg" alt="">
+                            اهواز، خیابان نادری، خیابان امیری، کوچه مهرگان، پلاک ۱۴، کد پستی 6381838168
+                        </a>
+                    </li>
+                    <li>
+                        <a href="" class="">
+                            <img src="assets/image/f2.svg" alt="">
+                            پشتیبانی: 09910549803
+                        </a>
+                    </li>
+                    <li>
+                        <a href="" class="">
+                            <img src="assets/image/f3.svg" alt="">
+                            30009010
+                        </a>
+                    </li>
+                    <li>
+                        <a href="" class="">
+                            <img src="assets/image/f4.svg" alt="">
+                            amirhamiri74@gmial.com
+                        </a>
+                    </li>
 
                     <button class="footer-btn my-3">ارسال پیام</button>
 
@@ -85,12 +103,13 @@
                         <a href=""> <i class="fa fa-twitter"></i></a>
                     </div>
 
-                </div>
+                </ul>
             </div>
         </section>
 
     </div>
 </footer>
+
 
 {% include 'include/script.html' %}
 
