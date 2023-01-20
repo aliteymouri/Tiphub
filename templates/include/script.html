@@ -18,33 +18,29 @@
             div.appendChild(button);
         }
     }
-</script>
 
 
-<script>
     function CanselButton() {
         var button = document.getElementById('button');
         button.parentNode.removeChild(button);
         document.getElementById("parent_id").value = null;
         document.getElementById("get_fullname").placeholder = "دیدگاه خود را بنویسید";
     }
-</script>
 
+</script>
 
 <script>
     function Del_Notif(id) {
         $.get(`DelNotif/${id}`)
 
     }
-</script>
 
-<script>
     function Del_Admin_Notif(id) {
         $.get(`DelAdmin/${id}`)
 
     }
-</script>
-<script>
+
+
     function choose_picture() {
         document.getElementById('image').click()
     }
@@ -60,7 +56,14 @@
     }
 </script>
 
-<script>
+
+<script src="https://code.jquery.com/jquery-3.5.1.js"
+        integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc="
+        crossorigin="anonymous"></script>
+
+<script type="text/javascript">
+
+
     function reveal() {
         if (document.getElementById('checkbox').checked) {
             document.getElementById("pass").type = 'text';
@@ -79,7 +82,7 @@
         Swal.fire({
             position: 'top-end-right',
             icon: 'warning',
-            title: "برای اضافه کردن این آموزش به علاقه مندی ها و لایک وارد حساب کاربری خود شوید",
+            title: "برای اضافه کردن این آموزش به علاقه مندی ها وارد حساب کاربری خود شوید",
             confirmButtonText: 'باشه',
             confirmButtonColor: '#112031',
         }).then(function () {
@@ -87,14 +90,7 @@
         })
     }
 
-</script>
 
-
-<script src="https://code.jquery.com/jquery-3.5.1.js"
-        integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc="
-        crossorigin="anonymous"></script>
-
-<script type="text/javascript">
     $(document).on('submit', '#edit_profile_form', function (e) {
         e.preventDefault();
         $.ajax({
@@ -109,9 +105,19 @@
                     bio: $("#bio").val(),
                     csrfmiddlewaretoken: $('input[name=csrfmiddlewaretoken]').val()
                 },
-            success: function (response) {
-                if (response['response'] === 'changed') {
+            success: function (json) {
+                if (json['response']) {
                     Swal.fire({
+                        title: 'هشدار',
+                        text: json['response'],
+                        icon: 'warning',
+                        confirmButtonText: 'باشه',
+                        confirmButtonColor: '#112031',
+                    })
+
+                } else {
+                    Swal.fire({
+                        title: 'عملیات با موفقیت انجام شد',
                         text: 'عملیات با موفقیت انجام شد',
                         icon: 'success',
                         confirmButtonText: 'باشه',
@@ -119,12 +125,10 @@
                     }).then(function () {
                         location.href = "{% url 'account:user_panel' %}";
                     })
-                } else {
-
                 }
             }
         })
-    });
+    })
 </script>
 
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script> {# NEW #}

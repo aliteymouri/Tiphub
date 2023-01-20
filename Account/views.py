@@ -98,8 +98,12 @@ class EditProfileView(RequiredLoginMixin, View):
         form = self.form_class(req.POST, instance=req.user)
         if form.is_valid():
             form.save()
-            return JsonResponse({"response":'changed'})
-        return render(req, self.template_name, {"form": form})
+        else:
+            for field in form:
+                if field.errors:
+                    err_msg = field.errors
+                    return JsonResponse({'response': err_msg})
+        return render(req, self.template_name)
 
 
 class ResetPasswordView(PasswordResetView):

@@ -17,20 +17,7 @@
 
                         <div class="user-panel custom-bg">
 
-                            {% for field in form %}
-                                {% if field.errors %}
-                                    <div align="center">
-                                        <div class="alert alert-danger alert-dismissible fade show w-50" role="alert">
-                                            {{ field.errors }}
-                                            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                                                <span aria-hidden="true">&times;</span>
-                                            </button>
-                                        </div>
-                                    </div>
-                                {% endif %}
-                            {% endfor %}
-
-                            <form method="post" id="edit_profile_form" enctype="multipart/form-data">
+                            <form method="post" id="edit_profile_form">
                                 {% csrf_token %}
                                 <div class="user-panel-box">
                                     <div class="user-panel-profile">
