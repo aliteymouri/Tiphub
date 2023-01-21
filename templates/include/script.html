@@ -103,6 +103,10 @@
                     image: $("#image").val(),
                     phone: $("#phone").val(),
                     bio: $("#bio").val(),
+                    github: $("#github").val(),
+                    linkedin: $("#linkedin").val(),
+                    instagram: $("#instagram").val(),
+                    twitter: $("#twitter").val(),
                     csrfmiddlewaretoken: $('input[name=csrfmiddlewaretoken]').val()
                 },
             success: function (json) {
@@ -110,7 +114,7 @@
                     Swal.fire({
                         title: 'هشدار',
                         text: json['response'],
-                        icon: 'warning',
+                        icon: 'error',
                         confirmButtonText: 'باشه',
                         confirmButtonColor: '#112031',
                     })

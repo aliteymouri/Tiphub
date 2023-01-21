@@ -1,16 +1,16 @@
 from .forms import SignInForm, SignUpForm, EditProfileForm, ChangePasswordForm, ResetPasswordForm
 from django.contrib.auth.views import PasswordResetView, PasswordChangeView
 from django.utils.http import urlsafe_base64_encode, urlsafe_base64_decode
-from django.contrib.auth import logout, authenticate, login
 from django.contrib.sites.shortcuts import get_current_site
 from .mixins import RequiredLoginMixin, AuthenticatedMixin
 from django.utils.encoding import force_bytes, force_str
 from django.views.generic import CreateView, TemplateView
+from django.contrib.auth import authenticate, login
 from django.template.loader import render_to_string
+from django.http import HttpResponse, JsonResponse
 from django.shortcuts import render, redirect
 from .tokens import account_activation_token
 from django.core.mail import EmailMessage
-from django.http import HttpResponse, JsonResponse
 from django.urls import reverse_lazy
 from django.views import View
 from .models import User

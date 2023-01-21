@@ -59,7 +59,9 @@ class UserChangeForm(forms.ModelForm):
 
     class Meta:
         model = User
-        fields = ('email', 'fullname', 'phone', 'password', 'bio', 'image', 'is_active', 'is_admin')
+        fields = (
+            'email', 'fullname', 'phone', 'password', 'bio', 'image', 'github', 'linkedin', 'instagram', 'twitter',
+            'is_active', 'is_admin')
 
 
 class SignInForm(forms.Form):
@@ -86,6 +88,8 @@ class SignUpForm(UserCreationForm):
 
 
 class EditProfileForm(forms.ModelForm):
+    image = forms.ImageField(required=False, widget=forms.FileInput({'id': 'image'}))
+
     email = forms.EmailField(
         widget=forms.EmailInput({'class': "email-input", "placeholder": "پست الکترونیک", "id": "email"}),
     )
@@ -96,15 +100,28 @@ class EditProfileForm(forms.ModelForm):
         widget=forms.TextInput({'class': "email-input", "placeholder": "شماره تماس", 'maxlength': 11, "id": "phone"}),
         validators=[start_with_09]
     )
+
+    github = forms.URLField(required=False,
+                            widget=forms.URLInput(
+                                {'class': 'email-input', "placeholder": "آدرس گیت هاب", 'id': "github"}))
+    linkedin = forms.URLField(required=False,
+                              widget=forms.URLInput(
+                                  {'class': 'email-input', "placeholder": "آدرس لینکدین", 'id': "linkedin"}))
+    instagram = forms.URLField(required=False,
+                               widget=forms.URLInput(
+                                   {'class': 'email-input', "placeholder": "آدرس اینستاگرام", 'id': "instagram"}))
+    twitter = forms.URLField(required=False,
+                             widget=forms.URLInput(
+                                 {'class': 'email-input', "placeholder": "آدرس توییتر", 'id': "twitter"}))
+
     bio = forms.CharField(required=False,
                           widget=forms.Textarea(
                               {'class': "form-control", "placeholder": "بیوگرافی", "rows": 3, "id": "bio"})
                           )
-    image = forms.ImageField(required=False, widget=forms.FileInput({'id': 'image'}))
 
     class Meta:
         model = User
-        fields = ('email', 'fullname', 'phone', 'image', 'bio')
+        fields = ('image', 'email', 'fullname', 'phone', 'github', 'linkedin', 'instagram', 'twitter', 'bio')
 
 
 class ResetPasswordForm(forms.Form):

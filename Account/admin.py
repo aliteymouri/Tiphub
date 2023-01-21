@@ -12,7 +12,7 @@ class UserAdmin(BaseUserAdmin):
     list_filter = ('is_active', 'is_admin')
 
     fieldsets = (
-        ('مشخصات', {'fields': ('email', 'fullname', 'phone', 'image', 'bio', 'password',)}),
+        ('مشخصات', {'fields': ('email', 'fullname', 'phone', 'image', 'bio', 'password','github','linkedin','instagram','twitter')}),
         ('دسترسی ها', {'fields': (
             'is_active', 'is_admin', 'is_superuser', 'groups', 'user_permissions')}
          ),
