@@ -1,11 +1,11 @@
-from .forms import SignInForm, SignUpForm, EditProfileForm, ChangePasswordForm
+from .forms import SignInForm, SignUpForm, EditProfileForm, ChangePasswordForm, ResetPasswordForm
 from django.contrib.auth.views import PasswordResetView, PasswordChangeView
 from django.utils.http import urlsafe_base64_encode, urlsafe_base64_decode
 from django.contrib.auth import logout, authenticate, login
 from django.contrib.sites.shortcuts import get_current_site
 from .mixins import RequiredLoginMixin, AuthenticatedMixin
 from django.utils.encoding import force_bytes, force_str
-from django.views.generic import CreateView, UpdateView, FormView, TemplateView
+from django.views.generic import CreateView, TemplateView
 from django.template.loader import render_to_string
 from django.shortcuts import render, redirect
 from .tokens import account_activation_token
@@ -110,13 +110,14 @@ class ResetPasswordView(PasswordResetView):
     template_name = "account/forgot_password.html"
     email_template_name = "passwords/password_reset_email.html"
     success_url = reverse_lazy('account:password_reset_send')
+    form_class = ResetPasswordForm
 
     def form_valid(self, form):
         if not User.objects.filter(email=form.cleaned_data.get('email')):
-            form.add_error("email", "کاربری با ایمیل وارد شده وجود ندارد")
-            return super(ResetPasswordView, self).form_invalid(form)
+            error = 'کاربری با ایمیل وارد شده وجود ندارد'
+            return JsonResponse({"response": error})
         else:
-            return super(ResetPasswordView, self).form_valid(form)
+            return render(self.request, self.template_name)
 
 
 class ChangePasswordView(PasswordChangeView):

@@ -129,6 +129,35 @@
             }
         })
     })
+
+
+    $(document).on('submit', '#forget_pass_form', function (e) {
+        e.preventDefault();
+        $.ajax({
+            type: 'POST',
+            url: '{% url 'account:reset_password' %}',
+            data: {
+                email: $('#email').val(),
+                csrfmiddlewaretoken: $('input[name=csrfmiddlewaretoken]').val(),
+            },
+            success: function (json) {
+                if (json['response']) {
+                    $('#forget_pass_error').html('<div class="alert alert-danger">' + json['response'] + '</div>')
+                } else {
+                    Swal.fire({
+                        title: 'عملیات با موفقیت انجام شد',
+                        text: 'ایمیلی حاوی یک لینک جهت تغییر گذرواژه تان ارسال شد',
+                        icon: 'success',
+                        confirmButtonText: 'باشه',
+                        confirmButtonColor: '#112031',
+                    }).then(function () {
+                        location.href = "{% url 'home:home' %}";
+                    })
+                }
+            }
+        })
+    })
+
 </script>
 
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script> {# NEW #}

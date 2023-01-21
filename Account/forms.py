@@ -107,15 +107,19 @@ class EditProfileForm(forms.ModelForm):
         fields = ('email', 'fullname', 'phone', 'image', 'bio')
 
 
-# I just customize placeholder and error of PasswordChangeForm
+class ResetPasswordForm(forms.Form):
+    email = forms.EmailField(
+        widget=forms.EmailInput({'class': "email-input", "placeholder": "پست الکترونیک", "id": "email"}),
+    )
+
 
 class ChangePasswordForm(PasswordChangeForm):
     def __init__(self, user, *args, **kwargs):
         self.user = user
         super().__init__(user, *args, **kwargs)
-        self.fields['old_password'].widget.attrs.update({'placeholder': "گذرواژه فعلی"})
-        self.fields['new_password1'].widget.attrs.update({'placeholder': "گذرواژه جدید"})
-        self.fields['new_password2'].widget.attrs.update({'placeholder': "تکرار گذرواژه"})
+        self.fields['old_password'].widget.attrs.update({'placeholder': "گذرواژه فعلی", 'id': "old_password"})
+        self.fields['new_password1'].widget.attrs.update({'placeholder': "گذرواژه جدید", 'id': "new_password1"})
+        self.fields['new_password2'].widget.attrs.update({'placeholder': "تکرار گذرواژه", 'id': "new_password2"})
 
     def clean_old_password(self):
         old_password = self.cleaned_data["old_password"]
