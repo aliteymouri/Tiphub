@@ -44,6 +44,7 @@ INSTALLED_APPS = [
     "Account.apps.AccountConfig",
     "Video.apps.VideoUploadConfig",
     "Notification.apps.NotificationConfig",
+    "Info.apps.InfoConfig",
 
     # Libraries
     "django_cleanup.apps.CleanupConfig",
