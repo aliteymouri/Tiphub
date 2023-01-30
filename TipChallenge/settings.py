@@ -52,6 +52,7 @@ INSTALLED_APPS = [
     "hitcount",
     "captcha",
     "ckeditor",
+    "taggit",
 
 ]
 

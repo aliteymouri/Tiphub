@@ -1,5 +1,6 @@
 from django.contrib.contenttypes.fields import GenericRelation
 from persiantools.jdatetime import JalaliDate
+from taggit.managers import TaggableManager
 from ckeditor.fields import RichTextField
 from django.utils.text import slugify
 from hitcount.models import HitCount
@@ -50,22 +51,6 @@ class SubCategory(models.Model):
         verbose_name_plural = "دسته بندی ها"
 
 
-class Tag(models.Model):
-    title = models.CharField("عنوان برچسب ", max_length=50, unique=True)
-    slug = models.SlugField("آدرس اسلاگ", unique=True, allow_unicode=True, null=True, blank=True)
-
-    def save(self, *args, **kwargs):
-        self.slug = slugify(self.title, allow_unicode=True)
-        super(Tag, self).save()
-
-    def __str__(self):
-        return self.title
-
-    class Meta:
-        verbose_name = "برچسب"
-        verbose_name_plural = "برچسب ها"
-
-
 class Video(models.Model):
     title = models.CharField("عنوان ویدیو", max_length=100, )
     publisher = models.ForeignKey(User, on_delete=models.CASCADE, verbose_name="منتشر کننده")
@@ -73,11 +58,12 @@ class Video(models.Model):
     video = models.FileField("آپلود ویدیو", upload_to='videos/')
     description = RichTextField("درباره ویدئو")
     video_cover = models.ImageField("بنر ویدیو", upload_to='banner')
-    tags = models.ManyToManyField(Tag, related_name='tags', verbose_name='برچسب ها')
+    tags = TaggableManager('تگ ها')
     time = models.CharField("تایم ویدیو", blank=True, null=True, max_length=15)
     likes_count = models.BigIntegerField("تعداد لایک ها", default=0)
     views = GenericRelation(HitCount, object_id_field='object_pk',
                             related_query_name='hit_count_generic_relation', verbose_name='تعداد بازدید')
+
     slug = models.SlugField("آدرس اسلاگ", unique=True, allow_unicode=True, null=True, blank=True)
     is_active = models.BooleanField("وضعیت ", default=True)
     created_at = models.DateTimeField("تاریخ انتشار در ", auto_now_add=True)
@@ -154,7 +140,7 @@ class Like(models.Model):
         ordering = ("-created_at",)
 
 
-class Favorite (models.Model):
+class Favorite(models.Model):
     video = models.ForeignKey(Video, on_delete=models.CASCADE, related_name="favorites", verbose_name="ویدیو")
     user = models.ForeignKey(User, on_delete=models.CASCADE, related_name="favorites", verbose_name="کاربر")
     created_at = models.DateField("تاریخ ثبت در", auto_now_add=True)

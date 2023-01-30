@@ -44,7 +44,3 @@ class FavoriteAdmin(admin.ModelAdmin):
 class LikeAdmin(admin.ModelAdmin):
     list_display = ("__str__",)
 
-
-@admin.register(models.Tag)
-class LikeAdmin(admin.ModelAdmin):
-    list_display = ("__str__",)
