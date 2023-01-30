@@ -6,18 +6,19 @@
 
 {% block content %}
 
+
     <main>
 
         <section class="py-5">
             <div class="container">
-
                 <div class="d-flex align-items-center justify-content-between mb-3">
-                    <h2 class="title-section">همه ویدیوها </h2>
+                    <h2 class="title-section"> تمامی آموزش ها </h2>
+
                 </div>
 
                 <div class="row">
                     <!-- item -->
-                    {% for video in object_list %}
+                    {% for video in video_list %}
                         <div class="col-md-6 col-lg-4 my-2">
                             <div class="custom-bg">
                                 <div class="video-card">
@@ -36,7 +37,7 @@
                                                 <i class="fa fa-eye"></i>
                                             </div>
                                             <div>
-                                                <span>{{ video.favorites.all.count }}</span>
+                                                <span>{{ video.likes.all.count }}</span>
                                                 <i class="fa fa-heart"></i>
                                             </div>
                                             <div>
@@ -48,20 +49,134 @@
                                     </a>
 
                                 </div>
+
                                 <a href="{{ video.get_absolute_url }}">
                                     <h5 class="video-card-title m-2">{{ video.title }}</h5>
                                 </a>
-                                <div class="my-3 pb-3 mx-2">
-                                    <i class="fa fa-user  ml-1 "></i>
-                                    <span>{{ video.publisher.fullname }}</span>
+
+                                <div class=" my-3 pb-3 mx-2 video-card-intro">
+                                    <div class="">
+                                        <i class="fa fa-user ml-1 "></i>
+                                        <span>{{ video.publisher.fullname }}</span>
+                                    </div>
+                                    <div align="left">
+                                        <span class="font14 text-success">
+                                            رایگان
+                                        </span>
+                                    </div>
                                 </div>
                             </div>
                         </div>
                     {% endfor %}
+
                     <!-- end item -->
+                    <!-- item -->
+                    <div class="col-md-6 col-lg-4 my-2">
+                        <div class="custom-bg">
+                            <div class="video-card">
+                                <a href="video-detail.html" class="position-relative d-block ">
+                                    <img src="assets/image/codeyadtv.jpg" alt="" class="img-fluid w-100 h-100">
+                                    <div class="video-play-btn">
+                                        <i class="fa fa-play"></i>
+                                    </div>
+                                    <div class="d-flex align-items-center justify-content-between video-category-time">
+                                        <h6 class="">موفقیت</h6>
+                                        <span class="vid-time">5:25</span>
+                                    </div>
+                                    <div class="video-card-details">
+                                        <div>
+                                            <span>22</span>
+                                            <i class="fa fa-eye"></i>
+                                        </div>
+                                        <div>
+                                            <span>22</span>
+                                            <i class="fa fa-heart"></i>
+                                        </div>
+                                        <div>
+                                            <span>22</span>
+                                            <i class="fa fa-comment"></i>
+                                        </div>
+                                    </div>
+                                    <div class="article-overlay"></div>
+                                </a>
+
+                            </div>
+                            <a href="video-detail.html">
+                                <h5 class="video-card-title m-2"> تازه ترین ویدیو ها تازه ترین ویدیو ها تازه ترین ویدیو
+                                    ها تازه ترین ویدیو هاتازه
+                                    ترین ویدیو هاتازه ترین ویدیو هاتازه ترین ویدیو ها</h5>
+                            </a>
+                            <div class=" my-3 pb-3 mx-2 video-card-intro">
+                                <div class="">
+                                    <i class="fa fa-user  ml-1 "></i>
+                                    <span>امیرحسین امیری</span>
+                                </div>
+                                <div>
+                                <span class="font14">
+                                    15000 تومان
+                                </span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- end item -->
+                    <!-- item -->
+                    <div class="col-md-6 col-lg-4 my-2">
+                        <div class="custom-bg">
+                            <div class="video-card">
+                                <a href="video-detail.html" class="position-relative d-block ">
+                                    <img src="assets/image/p3.png" alt="" class="img-fluid w-100 h-100">
+                                    <div class="video-play-btn">
+                                        <i class="fa fa-play"></i>
+                                    </div>
+                                    <div class="d-flex align-items-center justify-content-between video-category-time">
+                                        <h6 class="">موفقیت</h6>
+                                        <span class="vid-time">5:25</span>
+                                        <span class="discount">10%</span>
+                                    </div>
+                                    <div class="video-card-details">
+                                        <div>
+                                            <span>22</span>
+                                            <i class="fa fa-eye"></i>
+                                        </div>
+                                        <div>
+                                            <span>22</span>
+                                            <i class="fa fa-heart"></i>
+                                        </div>
+                                        <div>
+                                            <span>22</span>
+                                            <i class="fa fa-comment"></i>
+                                        </div>
+                                    </div>
+                                    <div class="article-overlay"></div>
+                                </a>
+
+                            </div>
+                            <a href="video-detail.html">
+                                <h5 class="video-card-title m-2"> تازه ترین ویدیو ها تازه ترین ویدیو ها تازه ترین ویدیو
+                                    ها تازه ترین ویدیو هاتازه
+                                    ترین ویدیو هاتازه ترین ویدیو هاتازه ترین ویدیو ها</h5>
+                            </a>
+                            <div class=" my-3 pb-3 mx-2 video-card-intro">
+                                <div class="">
+                                    <i class="fa fa-user  ml-1 "></i>
+                                    <span>امیرحسین امیری</span>
+                                </div>
+                                <div class="d-flex flex-column">
+                                    <s class="font14">
+                                        10000 تومان
+                                    </s>
+                                    <span class="font14 text-danger">
+                                    5000 تومان
+                                </span>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- end item -->
+
                 </div>
-
-
 
                 {% if page_obj.has_other_pages %}
 
@@ -91,11 +206,11 @@
 
                 {% endif %}
 
-
             </div>
         </section>
 
     </main>
+
 
 
 {% endblock %}
