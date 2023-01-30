@@ -8,6 +8,6 @@ class BeTeacherAdmin(admin.ModelAdmin):
     def get_queryset(self, request):
         qs = super().get_queryset(request)
         user = request.user
-        if user.is_superuser or user.is_CSO or user.is_CSO:
+        if user.is_superuser or user.is_staff:
             return qs
         return None

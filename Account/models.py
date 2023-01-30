@@ -17,6 +17,7 @@ class User(AbstractBaseUser, PermissionsMixin):
     date_joined = models.DateTimeField(auto_now_add=True, verbose_name="تاریخ ثبت نام ")
     is_active = models.BooleanField("وضعیت ", default=True)
     is_admin = models.BooleanField("مدیر سایت  ", default=False)
+    is_staff = models.BooleanField("کارمند سایت  ", default=False)
 
     objects = UserManager()
 
@@ -31,10 +32,12 @@ class User(AbstractBaseUser, PermissionsMixin):
 
     get_jalali_date.short_description = 'تاریخ ثبت نام'
 
-    @property
-    def is_staff(self):
-        return self.is_admin
-
     class Meta:
         verbose_name_plural = 'کاربرها'
         verbose_name = 'کاربر'
+
+    def has_perm(self, perm, obj=None):
+        return True
+
+    def has_module_perms(self, app_label):
+        return True

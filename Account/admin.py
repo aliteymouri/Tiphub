@@ -8,13 +8,14 @@ class UserAdmin(BaseUserAdmin):
     form = UserChangeForm
     add_form = UserCreationForm
 
-    list_display = ('email', 'fullname', 'phone', 'is_admin','is_active', 'get_jalali_date')
+    list_display = ('email', 'fullname', 'phone', 'is_admin', 'is_staff', 'is_active', 'get_jalali_date')
     list_filter = ('is_active', 'is_admin')
 
     fieldsets = (
-        ('مشخصات', {'fields': ('email', 'fullname', 'phone', 'image', 'bio', 'password','github','linkedin','instagram','twitter')}),
+        ('مشخصات', {'fields': (
+        'email', 'fullname', 'phone', 'image', 'bio', 'password', 'github', 'linkedin', 'instagram', 'twitter')}),
         ('دسترسی ها', {'fields': (
-            'is_active', 'is_admin', 'is_superuser', 'groups', 'user_permissions')}
+            'is_active', 'is_admin','is_staff', 'is_superuser', 'groups', 'user_permissions')}
          ),
     )
 

@@ -61,7 +61,7 @@ class UserChangeForm(forms.ModelForm):
         model = User
         fields = (
             'email', 'fullname', 'phone', 'password', 'bio', 'image', 'github', 'linkedin', 'instagram', 'twitter',
-            'is_active', 'is_admin')
+            'is_active', 'is_admin', 'is_staff')
 
 
 class SignInForm(forms.Form):

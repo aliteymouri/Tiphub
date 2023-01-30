@@ -1,0 +1,63 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}
+    درباره ما
+{% endblock %}
+
+{% block content %}
+    <main>
+
+        <h2 class="text-center border-bottom  py-5 bg-white">درباره ما</h2>
+
+        <section class="container my-5">
+            <p class=" text-justify lineh40">
+                تیپ هاب یه وب سایت آموزشی بر اساس، آموزش سریع و آسان سوالات و باگ هایی هست که هر برنامه نویس ممکن است با
+                اون‌ها روبرو شده باشه و یا روبرو بشه، تیپ هاب به همت جمعی از برنامه نویسان از سراسر کشور کار خود رو شروع
+                کرد و در حوزه های مختلف برنامه نویسی تولید محتوا می‌کند. تیپ هاب همچنین در نظر داره تا با ایده آموزش در
+                سریع ترین زمان ممکن، دانش اساتید خود رو در اختیار عموم برنامه نویسان قرار دهد، تا به این هدف مشترک که
+                همه در کنار هم می‌توانیم پیشرفت کنیم و دانش خود رو بالا ببریم برسیم.</p>
+            <h3 class="my-3">اهداف مجموعه تیپ هاب </h3>
+
+            <p class="text-justify lineh40">
+
+                اهداف ما در مجموعه تیپ هاب به ترتیب عبارتند از:
+            <ul class="lineh40 aboutus-goals">
+                <li>
+                    نکاتی که هر فرد نیاز داره تا به یک برنامه نویس حرفه ای تبدیل بشه رو در اختیار او بذاریم
+                </li>
+                <li>
+                    در سریع ترین زمان ممکن، به جواب سوالات خود برسن.
+                </li>
+                <li>
+                    ارائه آموزش های مفید و کاربردی
+                </li>
+            </ul>
+
+            </p>
+        </section>
+        <section class="my-5 container bg-white py-5">
+            <h3 class="our-team-title">اعضای تیم</h3>
+            <div class="d-flex align-items-center justify-content-center flex-wrap">
+                <!-- item -->
+                {% for member in members %}
+                    <div class="member">
+                        <div class="member-img-box">
+                            {% if member.image %}
+                                <img alt="{{ member.fullname }}" class="ui circular image"
+                                     src="{{ member.image.url }}">
+                            {% else %}
+                                <img alt="{{ member.fullname }}" class="ui circular image"
+                                     src="{% static "image/User_Default.jpg" %}">
+                            {% endif %}
+                            <div class="member-overlay"></div>
+                        </div>
+                        <p>{{ member.fullname }}</p>
+                    </div>
+                {% endfor %}
+            </div>
+        </section>
+
+
+    </main>
+{% endblock %}
