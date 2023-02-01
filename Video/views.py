@@ -1,7 +1,7 @@
 from Notification.models import PersonalNotification
 from Video.models import Video, Comment, Like, Favorite
 from django.views.generic import ListView, View
-from django.shortcuts import redirect, render, get_object_or_404
+from django.shortcuts import redirect, render
 from Account.mixins import RequiredLoginMixin
 from hitcount.views import HitCountDetailView
 from django.core.paginator import Paginator
