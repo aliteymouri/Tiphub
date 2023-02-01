@@ -22,3 +22,11 @@ class BeTeacherView(FormView):
     def form_valid(self, form):
         form.save()
         return redirect('home:home')
+
+
+class WhyTipHubView(TemplateView):
+    template_name = 'info/why-tiphub.html'
+
+
+class PrivacyPolicyView(TemplateView):
+    template_name = 'info/privacy-policy.html'
