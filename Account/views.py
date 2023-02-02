@@ -114,8 +114,7 @@ class ResetPasswordView(PasswordResetView):
 
     def form_valid(self, form):
         if not User.objects.filter(email=form.cleaned_data.get('email')):
-            error = 'کاربری با ایمیل وارد شده وجود ندارد'
-            return JsonResponse({"response": error})
+            return JsonResponse({"response": 'کاربری با ایمیل وارد شده وجود ندارد'})
         else:
             return render(self.request, self.template_name)
 
@@ -124,5 +123,3 @@ class ChangePasswordView(PasswordChangeView):
     template_name = 'account/change_password.html'
     success_url = reverse_lazy('account:user_panel')
     form_class = ChangePasswordForm
-
-

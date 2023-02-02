@@ -15,6 +15,7 @@ django-js-asset==2.0.0
 django-recaptcha==3.0.0
 django-taggit==3.1.0
 django-utils-six==2.0
+djangorestframework==3.14.0
 idna==3.4
 jdatetime==4.1.0
 oauthlib==3.2.2

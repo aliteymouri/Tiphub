@@ -10,6 +10,10 @@ from django import forms
 def start_with_09(value):
     if value[:2] != "09" or len(value) < 11:
         raise forms.ValidationError('یک شماره تماس معتبر وارد کنید', code='start_with_09')
+    try:
+        int(value)
+    except:
+        raise forms.ValidationError('یک شماره تماس معتبر وارد کنید', code='start_with_09')
 
 
 class UserCreationForm(forms.ModelForm):
@@ -18,6 +22,11 @@ class UserCreationForm(forms.ModelForm):
     confirm_password = forms.CharField(label='تایید گذرواژه ',
                                        widget=forms.PasswordInput(
                                            {"placeholder": "تایید گذرواژه", "id": "confirm_pass"}))
+
+    phone = forms.CharField(
+        widget=forms.TextInput({'class': "email-input", "placeholder": "شماره تماس", 'maxlength': 11}),
+        validators=[start_with_09]
+    )
 
     class Meta:
         model = User
@@ -32,12 +41,6 @@ class UserCreationForm(forms.ModelForm):
             raise ValidationError("رمز عبور وارد شده کمتر از 8 کاراکتر میباشد")
         return confirm_password
 
-    def clean_phone(self):
-        phone = self.cleaned_data.get('phone')
-        if len(phone) < 11:
-            raise ValidationError("یک شماره تماس معتبر وارد کنید")
-        return phone
-
     def save(self, commit=True):
         user = super().save(commit=False)
         user.set_password(self.cleaned_data['password'])
@@ -51,11 +54,10 @@ class UserChangeForm(forms.ModelForm):
         help_text="برای تغییر گذرواژه <a href=\"../password/\">کلیک کنید</a>"
     )
 
-    def clean_phone(self):
-        phone = self.cleaned_data.get('phone')
-        if len(phone) < 11:
-            raise ValidationError("یک شماره تماس معتبر وارد کنید")
-        return phone
+    phone = forms.CharField(
+        widget=forms.TextInput({'class': "email-input", "placeholder": "شماره تماس", 'maxlength': 11}),
+        validators=[start_with_09]
+    )
 
     class Meta:
         model = User

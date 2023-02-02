@@ -54,6 +54,7 @@ INSTALLED_APPS = [
     "captcha",
     "ckeditor",
     "taggit",
+    "rest_framework",
 
 ]
 
