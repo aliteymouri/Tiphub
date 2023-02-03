@@ -40,7 +40,6 @@
 
     }
 
-
     function choose_picture() {
         document.getElementById('image').click()
     }
@@ -146,7 +145,12 @@
             },
             success: function (json) {
                 if (json['response']) {
-                    $('#forget_pass_error').html('<div class="alert alert-danger">' + json['response'] + '</div>')
+                    $('#forget_pass_error').html('<div class="alert alert-danger alert-dismissible fade show" role="alert">'
+                        + json['response'] +
+                        '<button type="button" class="close" data-dismiss="alert" aria-label="Close">'
+                        + '<span aria-hidden="true">'
+                        + '&times;' + '</span>'
+                        + '</button>' + '</div>')
                 } else {
                     Swal.fire({
                         title: 'عملیات با موفقیت انجام شد',
