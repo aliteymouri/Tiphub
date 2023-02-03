@@ -1,15 +1,16 @@
-{% extends 'base.html' %}
+{% extends "base.html" %}
 {% load static %}
 
+{% block title %}
+    چرا تیپ‌هاب
+{% endblock %}
 
 {% block content %}
-
-
     <main>
 
         <section class="pb-5">
             <div class="why-tiphub-header">
-                <img src="{% static 'image/m10.webp' %}" alt="" class="img-fluid">
+                <img src="{% static "image/m10.webp" %}" alt="" class="img-fluid w-100 h-50">
                 <div class="container-fluid">
                     <h4 class="title-section why-tiphub-title">چرا تیپ هاب</h4>
                     <p class="why-tiphub-des">تیپ هاب یعنی در سریع ترین زمان ممکن, بهترین نکات را یاد بگیر</p>
@@ -46,6 +47,5 @@
 
 
     </main>
-
-
 {% endblock %}
+
