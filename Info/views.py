@@ -1,5 +1,6 @@
+from django.http import JsonResponse
 from django.views.generic import TemplateView, FormView
-from django.shortcuts import redirect
+from django.shortcuts import redirect, render
 from django.urls import reverse_lazy
 from Info.forms import BeTeacherForm
 from Account.models import User
@@ -19,9 +20,16 @@ class BeTeacherView(FormView):
     success_url = reverse_lazy('home:home')
     form_class = BeTeacherForm
 
-    def form_valid(self, form):
-        form.save()
-        return redirect('home:home')
+    def post(self, req, *args):
+        form = self.form_class(req.POST)
+        if form.is_valid():
+            form.save()
+        else:
+            for field in form:
+                if field.errors:
+                    err_msg = field.errors
+                    return JsonResponse({'response': err_msg})
+        return render(req, self.template_name)
 
 
 class WhyTipHubView(TemplateView):

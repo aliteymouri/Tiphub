@@ -87,6 +87,7 @@
             document.getElementById("confirm_pass").type = 'password';
         }
     }
+
     function Warning() {
         Swal.fire({
             position: 'top-end-right',
@@ -98,6 +99,7 @@
             location.href = "{% url 'account:sign_in' %}";
         })
     }
+
     $(document).on('submit', '#edit_profile_form', function (e) {
         e.preventDefault();
         $.ajax({
@@ -167,6 +169,28 @@
                     }).then(function () {
                         location.href = "{% url 'home:home' %}";
                     })
+                }
+            }
+        })
+    })
+
+
+    $(document).on('submit', '#be_teacher_form', function (e) {
+        e.preventDefault();
+        $.ajax({
+            type: 'POST',
+            url: '{% url 'info:be_teacher' %}',
+            data: {
+                email: $('#email').val(),
+                fullname: $('#fullname').val(),
+                phone_number: $('#phone_number').val(),
+                skill: $('#skill').val(),
+                resume: $('#resume').val(),
+                csrfmiddlewaretoken: $('input[name=csrfmiddlewaretoken]').val(),
+            },
+            success: function (json) {
+                if (json['response']) {
+                    alert(json['response'])
                 }
             }
         })
