@@ -220,4 +220,39 @@
         })
     })
 
+
+    $(document).on('submit', '#change-password-form', function (e) {
+        e.preventDefault();
+        $.ajax({
+            type: 'POST',
+            url: '{% url 'account:change_password' %}',
+            data: {
+                old_password: $('#old_password').val(),
+                new_password1: $('#new_password1').val(),
+                new_password2: $('#new_password2').val(),
+                csrfmiddlewaretoken: $('input[name=csrfmiddlewaretoken]').val(),
+            },
+            success: function (json) {
+                if (json['response']) {
+                    $('#change-pass-error').html('<div class="alert alert-danger alert-dismissible fade show" role="alert">'
+                        + json['response'] +
+                        '<button type="button" class="close" data-dismiss="alert" aria-label="Close">'
+                        + '<span aria-hidden="true">'
+                        + '&times;' + '</span>'
+                        + '</button>' + '</div>')
+                } else {
+                    Swal.fire({
+                        title: 'عملیات با موفقیت انجام شد',
+                        text: 'گذرواژه تان با موفقیت تغییر کرد',
+                        icon: 'success',
+                        confirmButtonText: 'باشه',
+                        confirmButtonColor: '#112031',
+                    }).then(function () {
+                        location.href = "{% url 'account:user_panel' %}";
+                    })
+                }
+            }
+        })
+    })
+
 </script>

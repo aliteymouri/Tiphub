@@ -4,7 +4,7 @@ from django.utils.http import urlsafe_base64_encode, urlsafe_base64_decode
 from django.contrib.sites.shortcuts import get_current_site
 from .mixins import RequiredLoginMixin, AuthenticatedMixin
 from django.utils.encoding import force_bytes, force_str
-from django.contrib.auth import authenticate, login
+from django.contrib.auth import authenticate, login, update_session_auth_hash
 from django.template.loader import render_to_string
 from django.http import HttpResponse, JsonResponse
 from django.shortcuts import render, redirect
@@ -121,5 +121,11 @@ class ResetPasswordView(PasswordResetView):
 
 class ChangePasswordView(PasswordChangeView):
     template_name = 'account/change_password.html'
-    success_url = reverse_lazy('account:user_panel')
     form_class = ChangePasswordForm
+
+    def form_invalid(self, form):
+        for field in form:
+            if field.errors:
+                err_msg = field.errors
+                return JsonResponse({'response': err_msg})
+        return super().form_invalid(form)
