@@ -8,7 +8,7 @@ class User(AbstractBaseUser, PermissionsMixin):
     email = models.EmailField("پست الکترونیک", max_length=120, unique=True)
     phone = models.CharField("شماره تماس ", max_length=11, unique=True, )
     fullname = models.CharField("نام و نام خانوادگی  ", max_length=80)
-    image = models.ImageField(upload_to="users/profile", null=True, blank=True, verbose_name='عکس پروفایل')
+    image = models.FileField(upload_to="users/profile", null=True, blank=True, verbose_name='عکس پروفایل')
     bio = models.TextField("بیوگرافی ", null=True, blank=True, )
     github = models.URLField('آدرس گیت هاب', blank=True)
     linkedin = models.URLField('آدرس لینکدین', blank=True)

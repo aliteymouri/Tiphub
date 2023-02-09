@@ -100,24 +100,27 @@
         })
     }
 
+    var formData = new FormData();
     $(document).on('submit', '#edit_profile_form', function (e) {
+        formData.append('fullname', $('#fullname').val())
+        formData.append('email', $('#email').val())
+        formData.append('phone', $('#phone').val())
+        formData.append('bio', $('#bio').val())
+        formData.append('github', $('#github').val())
+        formData.append('linkedin', $('#linkedin').val())
+        formData.append('instagram', $('#instagram').val())
+        formData.append('twitter', $('#twitter').val())
+        formData.append('image', $('#image')[0].files[0])
+        formData.append('csrfmiddlewaretoken', '{{ csrf_token }}')
         e.preventDefault();
         $.ajax({
             type: 'POST',
             url: '{% url "account:edit_profile" %}',
-            data:
-                {
-                    email: $("#email").val(),
-                    fullname: $("#fullname").val(),
-                    image: $("#image").val(),
-                    phone: $("#phone").val(),
-                    bio: $("#bio").val(),
-                    github: $("#github").val(),
-                    linkedin: $("#linkedin").val(),
-                    instagram: $("#instagram").val(),
-                    twitter: $("#twitter").val(),
-                    csrfmiddlewaretoken: $('input[name=csrfmiddlewaretoken]').val()
-                },
+            data: formData,
+            cache: false,
+            processData: false,
+            contentType: false,
+            enctype: 'multipart/form-data',
             success: function (json) {
                 if (json['response']) {
                     Swal.fire({

@@ -95,7 +95,7 @@ class EditProfileView(RequiredLoginMixin, View):
         return render(req, self.template_name, {"form": form})
 
     def post(self, req):
-        form = self.form_class(req.POST, instance=req.user)
+        form = self.form_class(req.POST, req.FILES, instance=req.user)
         if form.is_valid():
             form.save()
         else:
