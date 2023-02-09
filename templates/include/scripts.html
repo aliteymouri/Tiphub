@@ -178,22 +178,43 @@
     })
 
 
+    var formData1 = new FormData();
     $(document).on('submit', '#be_teacher_form', function (e) {
+        formData1.append('fullname', $('#fullname').val())
+        formData1.append('email', $('#email').val())
+        formData1.append('phone_number', $('#phone_number').val())
+        formData1.append('skill', $('#skill').val())
+        formData1.append('resume', $('#resume')[0].files[0])
+        formData1.append('csrfmiddlewaretoken', '{{ csrf_token }}')
         e.preventDefault();
         $.ajax({
             type: 'POST',
-            url: '{% url 'info:be_teacher' %}',
-            data: {
-                email: $('#email').val(),
-                fullname: $('#fullname').val(),
-                phone_number: $('#phone_number').val(),
-                skill: $('#skill').val(),
-                resume: $('#resume').val(),
-                csrfmiddlewaretoken: $('input[name=csrfmiddlewaretoken]').val(),
-            },
+            url: '{% url "info:be_teacher" %}',
+            data: formData1,
+            cache: false,
+            processData: false,
+            contentType: false,
+            enctype: 'multipart/form-data',
             success: function (json) {
-                if (json['response']) {
-                    alert(json['response'])
+                if (json['errors']) {
+                    Swal.fire({
+                        title: 'هشدار',
+                        text: json['errors'],
+                        icon: 'error',
+                        confirmButtonText: 'باشه',
+                        confirmButtonColor: '#112031',
+                    })
+
+                } else {
+                    Swal.fire({
+                        title: 'عملیات با موفقیت انجام شد',
+                        text: 'اطلاعات شما با موفقیت ارسال گردید',
+                        icon: 'success',
+                        confirmButtonText: 'باشه',
+                        confirmButtonColor: '#112031',
+                    }).then(function () {
+                        location.href = "{% url 'home:home' %}";
+                    })
                 }
             }
         })

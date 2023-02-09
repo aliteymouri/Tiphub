@@ -7,8 +7,7 @@ class BeTeacher(models.Model):
     skill = models.CharField('مهارت', max_length=30, )
     email = models.EmailField('آدرس ایمیل')
     phone_number = models.CharField('شماره تماس', max_length=11, )
-    resume = models.FileField('رزومه', upload_to="resume", validators=[
-        FileExtensionValidator(['pdf'])])
+    resume = models.FileField('رزومه', upload_to="resume", )
 
     class Meta:
         verbose_name = "درخواست تدریس"

@@ -17,18 +17,17 @@ class AboutUsView(TemplateView):
 
 class BeTeacherView(FormView):
     template_name = 'info/be-teacher.html'
-    success_url = reverse_lazy('home:home')
     form_class = BeTeacherForm
 
     def post(self, req, *args):
-        form = self.form_class(req.POST)
+        form = self.form_class(req.POST, req.FILES)
         if form.is_valid():
             form.save()
         else:
             for field in form:
                 if field.errors:
                     err_msg = field.errors
-                    return JsonResponse({'response': err_msg})
+                    return JsonResponse({'errors': err_msg})
         return render(req, self.template_name)
 
 
