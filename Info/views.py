@@ -1,8 +1,7 @@
-from django.http import JsonResponse
 from django.views.generic import TemplateView, FormView
-from django.shortcuts import redirect, render
-from django.urls import reverse_lazy
 from Info.forms import BeTeacherForm
+from django.http import JsonResponse
+from django.shortcuts import render
 from Account.models import User
 
 
