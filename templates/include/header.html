@@ -73,10 +73,16 @@
 
                             {% if request.user.is_authenticated %}
                                 <a class="" href="{% url 'account:user_panel' %}"> پروفایل</a>
+                                {% if not request.resolver_match.url_name == 'home' %}
+                                    <a class="" href="{% url 'home:home' %}">صفحه اصلی</a>
+                                {% endif %}
                                 <a class="" href="{% url 'video:favorites' %}">علاقه مندی ها</a>
                                 <hr>
                                 <a class="" href="{% url 'account:logout' %}">خروج از حساب</a>
                             {% else %}
+                                {% if not request.resolver_match.url_name == 'home' %}
+                                    <a class="" href="{% url 'home:home' %}">صفحه اصلی</a>
+                                {% endif %}
                                 <a class="" href="{% url 'account:sign_in' %}"> <i class=" fa fa-account"></i> ورود
                                 </a>
                                 <a class="" href="{% url 'account:sign_up' %}"> ثبت نام</a>
@@ -160,10 +166,16 @@
 
                             {% if request.user.is_authenticated %}
                                 <a class="" href="{% url 'account:user_panel' %}"> پروفایل</a>
+                                {% if not request.resolver_match.url_name == 'home' %}
+                                    <a class="" href="{% url 'home:home' %}">صفحه اصلی</a>
+                                {% endif %}
                                 <a class="" href="{% url 'video:favorites' %}"> مورد علاقه ها</a>
                                 <hr>
                                 <a class="" href="{% url 'account:logout' %}"> خروج از حساب </a>
                             {% else %}
+                                {% if not request.resolver_match.url_name == 'home' %}
+                                    <a class="" href="{% url 'home:home' %}">صفحه اصلی</a>
+                                {% endif %}
                                 <a class="" href="{% url 'account:sign_in' %}"> <i class=" fa fa-account"></i> ورود
                                 </a>
                                 <a class="" href="{% url 'account:sign_up' %}"> ثبت نام </a>
