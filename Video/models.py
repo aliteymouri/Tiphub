@@ -53,7 +53,7 @@ class SubCategory(models.Model):
 
 class Video(models.Model):
     title = models.CharField("عنوان ویدیو", max_length=100, )
-    publisher = models.ForeignKey(User, on_delete=models.CASCADE, verbose_name="منتشر کننده")
+    publisher = models.ForeignKey(User, on_delete=models.CASCADE, verbose_name="منتشر کننده",related_name='videos')
     category = models.ManyToManyField(SubCategory, related_name='videos', verbose_name="دسته بندی ویدیو")
     video = models.FileField("آپلود ویدیو", upload_to='videos/')
     description = RichTextField("درباره ویدئو")

@@ -1,4 +1,4 @@
-from django.views.generic import TemplateView, FormView
+from django.views.generic import TemplateView, FormView, ListView
 from Info.forms import BeTeacherForm
 from django.http import JsonResponse
 from django.shortcuts import render
@@ -28,6 +28,11 @@ class BeTeacherView(FormView):
                     err_msg = field.errors
                     return JsonResponse({'errors': err_msg})
         return render(req, self.template_name)
+
+
+class TeachersView(ListView):
+    queryset = User.objects.filter(is_staff=True)
+    template_name = "info/teachers.html"
 
 
 class WhyTipHubView(TemplateView):
