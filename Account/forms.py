@@ -38,7 +38,7 @@ class UserCreationForm(forms.ModelForm):
         if password and confirm_password and password != confirm_password:
             raise ValidationError("رمزعبور مشابه نمیباشد")
         elif len(password and confirm_password) < 8:
-            raise ValidationError("رمز عبور وارد شده کمتر از 8 کاراکتر میباشد")
+            raise ValidationError("طول گذرواژه باید حداقل ۸ کاراکتر باشد")
         return confirm_password
 
     def save(self, commit=True):
