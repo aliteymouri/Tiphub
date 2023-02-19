@@ -55,7 +55,15 @@ INSTALLED_APPS = [
     "captcha",
     "ckeditor",
     "taggit",
+
+    # Restapi
     "rest_framework",
+
+    # SignInGoogle
+    'allauth',
+    'allauth.account',
+    'allauth.socialaccount',
+    'allauth.socialaccount.providers.google',
 
 ]
 

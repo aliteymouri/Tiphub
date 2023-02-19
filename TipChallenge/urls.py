@@ -31,6 +31,7 @@ urlpatterns = [
                   path('', include('django.contrib.auth.urls')),
                   path('hitcount/', include(('hitcount.urls', 'hitcount'), namespace='hitcount')),
                   path('', include('social_django.urls', namespace='social')),  # Django_Social
+                  path('accounts/', include('allauth.urls')),
               ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 # 404 page
 handler404 = 'Home.views.error_404_view'
