@@ -1,4 +1,4 @@
-from django.contrib.auth.forms import ReadOnlyPasswordHashField
+from django.contrib.auth.forms import ReadOnlyPasswordHashField, PasswordResetForm
 from django.contrib.auth.forms import PasswordChangeForm
 from captcha.widgets import ReCaptchaV2Checkbox
 from captcha.fields import ReCaptchaField
@@ -126,10 +126,15 @@ class EditProfileForm(forms.ModelForm):
         fields = ('image', 'email', 'fullname', 'phone', 'github', 'linkedin', 'instagram', 'twitter', 'bio')
 
 
-class ResetPasswordForm(forms.Form):
+class ResetPasswordForm(PasswordResetForm):
     email = forms.EmailField(
         widget=forms.EmailInput({'class': "email-input", "placeholder": "پست الکترونیک", "id": "email"}),
     )
+
+    def clean_email(self):
+        if not User.objects.filter(email=self.cleaned_data.get('email')):
+            raise ValidationError("کاربری با ایمیل وارد شده وجود ندارد")
+        return self.cleaned_data.get('email')
 
 
 class ChangePasswordForm(PasswordChangeForm):
