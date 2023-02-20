@@ -182,8 +182,8 @@
                                                     {% if request.user == comment.author %}
 
                                                         <button onclick="RemoveComment({{ comment.id }})"><i
-                                                                class="fa fa-trash-o"
-                                                                style="font-size:20px;color:red;margin-right:8px"></i>
+                                                                class="fa fa-trash text-danger"
+                                                                style="font-size:16px;color:red;margin-right:8px"></i>
                                                         </button>
 
                                                     {% endif %}
@@ -229,8 +229,8 @@
                                                         {% if request.user == reply.author %}
 
                                                             <button onclick="RemoveComment({{ reply.id }})"><i
-                                                                    class="fa fa-trash-o"
-                                                                    style="font-size:20px;color:red;margin-right:8px"></i>
+                                                                    class="fa fa-trash text-danger"
+                                                                    style="font-size:16px;color:red;margin-right:8px"></i>
                                                             </button>
 
                                                         {% endif %}
@@ -388,12 +388,12 @@
                 if (result.isConfirmed) {
                     $.get(`/remove/${id}`).then(response => {
                         Swal.fire({
-                            title: 'عملیات با موفقیت انجام شد',
+                            text: 'عملیات با موفقیت انجام شد',
                             icon: 'success',
                             confirmButtonText: 'باشه',
                             confirmButtonColor: '#112031',
                         }).then(function () {
-                            location.href = "{% url 'video:video_detail' object.slug %}";
+                            location.reload();
                         })
 
                     })
