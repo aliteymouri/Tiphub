@@ -27,7 +27,7 @@ urlpatterns = [
                   path('', include('Video.urls')),
                   path('', include('Notification.urls')),
                   path('', include('Info.urls')),
-                  path('', include('Payment.urls')),
+                  path('payment/', include('Payment.urls')),
                   path('', include('django.contrib.auth.urls')),
                   path('hitcount/', include(('hitcount.urls', 'hitcount'), namespace='hitcount')),
                   path('', include('social_django.urls', namespace='social')),  # Django_Social

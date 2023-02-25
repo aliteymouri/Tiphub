@@ -18,7 +18,7 @@ class VideoListView(ListView):
 
 class VideoDetailView(HitCountDetailView):
     model = Video
-    template_name = "video/video_detail.html"
+    template_name = "video/video-detail.html"
     count_hit = True
 
     def post(self, req, *args, **kwargs):
@@ -44,7 +44,7 @@ class VideoDetailView(HitCountDetailView):
         })
         # Pagination of Comments
         comments = Comment.objects.filter(video=self.get_object()).order_by('-created_at')
-        paginator = Paginator(comments, 2)
+        paginator = Paginator(comments, 10)
         page = self.request.GET.get("page")
         context["comments"] = paginator.get_page(page)
 
