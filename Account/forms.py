@@ -138,12 +138,9 @@ class ResetPasswordForm(PasswordResetForm):
 
 
 class ChangePasswordForm(PasswordChangeForm):
-    def __init__(self, user, *args, **kwargs):
-        self.user = user
-        super().__init__(user, *args, **kwargs)
-        self.fields['old_password'].widget.attrs.update({'placeholder': "گذرواژه فعلی", 'id': "old_password"})
-        self.fields['new_password1'].widget.attrs.update({'placeholder': "گذرواژه جدید", 'id': "new_password1"})
-        self.fields['new_password2'].widget.attrs.update({'placeholder': "تکرار گذرواژه", 'id': "new_password2"})
+    old_password = forms.CharField(widget=forms.PasswordInput({'placeholder': "گذرواژه فعلی", 'id': "old_password"}))
+    new_password1 = forms.CharField(widget=forms.PasswordInput({'placeholder': "گذرواژه جدید", 'id': "new_password1"}))
+    new_password2 = forms.CharField(widget=forms.PasswordInput({'placeholder': "تکرار گذرواژه", 'id': "new_password2"}))
 
     def clean_old_password(self):
         old_password = self.cleaned_data["old_password"]

@@ -32,7 +32,7 @@ class SignInView(AuthenticatedMixin, View):
                 login(req, user)
                 return redirect('account:user_panel')
             else:
-                form.add_error('email', 'کاربری با مشخصات وارد شده یافت نشد')
+                form.add_error('email', 'ایمیل یا گذرواژه وارد شده صحیح نمیباشد.')
         return render(req, self.template_name, {'form': form})
 
 
@@ -46,7 +46,7 @@ class SignUpView(AuthenticatedMixin, CreateView):
         user.save()
 
         current_site = get_current_site(self.request)
-        mail_subject = 'لینک فعالسازی حساب کاربری'
+        mail_subject = 'لینک فعالسازی حساب کاربری (تیپ هاب)'
         message = render_to_string('emails/acc_active_email.html', {
             'user': user,
             'domain': current_site.domain,
@@ -120,8 +120,9 @@ class ResetPasswordView(PasswordResetView):
         return super().form_invalid(form)
 
 
-class ChangePasswordView(PasswordChangeView):
+class ChangePasswordView(RequiredLoginMixin, PasswordChangeView):
     template_name = 'account/change_password.html'
+    success_url = reverse_lazy('account:user_panel')
     form_class = ChangePasswordForm
 
     def form_invalid(self, form):
