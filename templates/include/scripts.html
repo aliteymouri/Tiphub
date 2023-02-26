@@ -17,7 +17,8 @@
 <script>
     function set_value(id, fullname) {
         document.getElementById("parent_id").value = id;
-        window.location.href = "#scroll";
+        var MySection = document.getElementById("scroll");
+        MySection.scrollIntoView({block: 'start', behavior: 'smooth', inline: 'start'});
         document.getElementById("get_fullname").placeholder = ` پاسخ به نظر ${fullname}`;
 
         {# for cansel comment after reply #}

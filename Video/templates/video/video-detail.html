@@ -22,7 +22,7 @@
                                     </div>
                                 </div>
                                 <div class="video">
-                                    <video width="100%" id="myVideo" autoplay>
+                                    <video width="100%" id="myVideo">
                                         <source src="{{ object.video.url }}" type="video/mp4">
                                     </video>
                                     <img src="{{ object.video_cover.url }}" width="100%" height="100%"
@@ -108,7 +108,7 @@
                             </div>
                             <!-- description -->
                             <div class="border-bottom pb-3">
-                                <h4 class="my-3">توضیحات</h4>
+                                <h4 class="my-3" id="scroll">توضیحات</h4>
                                 <p class="color78">{{ object.description|safe }}</p>
 
                                 <!-- video-slider -->
@@ -121,7 +121,7 @@
                                             <div class="">
                                                 <div class="custom-bg">
                                                     <div class="video-card">
-                                                        <a href="video-detail.html" class="position-relative d-block ">
+                                                        <a href="" class="position-relative d-block ">
                                                             <img src="{% static 'image/p3.png' %}" alt=""
                                                                  class="img-fluid w-100 h-100">
                                                             <div class="video-play-btn">
@@ -376,7 +376,7 @@
                                     {% endif %}
                                 {% endfor %}
 
-                             {# Pagination of Comments #}
+                                {# Pagination of Comments #}
 
                                 {% if comments.has_other_pages %}
 
@@ -434,15 +434,23 @@
                                 <p class="color78 teacher-description py-3"> بیوگرافی
                                     : {{ object.publisher.bio }}</p>
                             {% else %}
-                                <p class="color78 teacher-description py-3"> بیوگرافی : خالی </p>
+                                <p class="color78 teacher-description py-3"> بیوگرافی : {{ object.publisher.fullname }} </p>
                             {% endif %}
 
 
                             <div class="teacher-social-media d-flex align-items-center justify-content-between flex-wrap">
-                                <a href=""> <i class="fa fa-instagram"></i></a>
-                                <a href=""> <i class="fa fa-github"></i></a>
-                                <a href=""> <i class="fa fa-linkedin"></i></a>
-                                <a href=""> <i class="fa fa-twitter"></i></a>
+                                {% if object.publisher.instagram %}
+                                    <a href="{{ object.publisher.instagram }}"> <i class="fa fa-instagram"></i></a>
+                                {% endif %}
+                                {% if object.publisher.github %}
+                                    <a href="{{ object.publisher.github }}"> <i class="fa fa-github"></i></a>
+                                {% endif %}
+                                {% if object.publisher.linkedin %}
+                                    <a href="{{ object.publisher.linkedin }}"> <i class="fa fa-linkedin"></i></a>
+                                {% endif %}
+                                {% if object.publisher.twitter %}
+                                    <a href="{{ object.publisher.twitter }}"> <i class="fa fa-twitter"></i></a>
+                                {% endif %}
                             </div>
 
                             <div class="d-none d-md-block">
