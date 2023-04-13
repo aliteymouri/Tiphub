@@ -1,4 +1,4 @@
-from Video.models import Category
+from video.models import Category
 
 
 def cat_list(req):
