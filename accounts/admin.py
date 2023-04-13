@@ -13,9 +13,9 @@ class UserAdmin(BaseUserAdmin):
 
     fieldsets = (
         ('مشخصات', {'fields': (
-        'email', 'fullname', 'phone', 'image', 'bio', 'password', 'github', 'linkedin', 'instagram', 'twitter')}),
+            'email', 'fullname', 'phone', 'image', 'bio', 'password', 'github', 'linkedin', 'instagram', 'twitter')}),
         ('دسترسی ها', {'fields': (
-            'is_active', 'is_admin','is_staff', 'is_superuser', 'groups', 'user_permissions')}
+            'is_active', 'is_admin', 'is_staff', 'is_superuser', 'groups', 'user_permissions')}
          ),
     )
 
@@ -35,6 +35,23 @@ class UserAdmin(BaseUserAdmin):
         if not is_superuser:
             form.base_fields['is_superuser'].disable = True
         return form
+
+    def has_delete_permission(self, request, obj=None):
+        if not request.user.is_admin:
+            if obj is not None and obj.id != request.user.id:
+                return False
+        return True
+
+    def has_change_permission(self, request, obj=None):
+        if not request.user.is_admin:
+            if obj is not None and obj.id != request.user.id:
+                return False
+        return True
+
+    def has_add_permission(self, request):
+        if request.user.is_admin:
+            return True
+        return False
 
 
 admin.site.register(User, UserAdmin)
