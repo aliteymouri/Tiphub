@@ -1,7 +1,6 @@
-from django.shortcuts import render, get_object_or_404, redirect
-from django.views import View
-
-from video.models import Video
+from django.shortcuts import *
+from django.views import *
+from video.models import *
 
 
 class CartDetailView(View):
@@ -16,4 +15,3 @@ class CartAddView(View):
         video = get_object_or_404(Video, id=pk)
         print(video.title, video.price)
         return redirect('payment:cart-detail')
-
