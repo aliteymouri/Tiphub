@@ -1,3 +1,5 @@
+from video.models import Video
+
 CART_SESSION_ID = 'cart'
 
 
@@ -15,6 +17,14 @@ class Cart:
             self.cart[video_id] = {'id': video.id, 'title': video.title,
                                    'publisher': str(video.publisher_id, ), 'price': str(video.price)}
         self.save()
+
+    def __iter__(self):
+        cart = self.cart.copy()
+
+        for item in cart.values():
+            item['video'] = Video.objects.get(id=int(item['id']))
+            item['total'] = int(item['quantity']) * int(item['price'])
+            yield
 
     def save(self):
         self.session.modified = True
