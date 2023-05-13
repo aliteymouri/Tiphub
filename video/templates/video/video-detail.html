@@ -432,7 +432,8 @@
                                 <p class="color78 teacher-description py-3"> بیوگرافی
                                     : {{ object.publisher.bio }}</p>
                             {% else %}
-                                <p class="color78 teacher-description py-3"> بیوگرافی : {{ object.publisher.fullname }} </p>
+                                <p class="color78 teacher-description py-3"> بیوگرافی
+                                    : {{ object.publisher.fullname }} </p>
                             {% endif %}
 
 
@@ -452,8 +453,15 @@
                             </div>
 
                             <div class="d-none d-md-block">
-                                <button class="btn buy-video-btn w-100 my-4">خرید این ویدیو</button>
-                                {#                                <p class="my-4 w-100 my-video-notif">این آموزش خریداری شده</p>#}
+                                <form action="{% url 'payment:cart-add' video.pk %}" method="post">
+                                    {% csrf_token %}
+                                    <p style="color: #f4662e; font-size: 20px" class="text text-center">
+                                        {{ video.price }} ریال</p>
+                                    <button class="btn buy-video-btn w-100 my-4">خرید این ویدیو</button>
+
+                                    {#                                    <p class="my-4 w-100 my-video-notif">این آموزش خریداری شده</p>#}
+
+                                </form>
                             </div>
                         </div>
 

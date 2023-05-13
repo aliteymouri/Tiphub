@@ -58,6 +58,7 @@ class Video(models.Model):
     video = models.FileField("آپلود ویدیو", upload_to='videos/')
     description = RichTextField("درباره ویدئو")
     video_cover = models.ImageField("بنر ویدیو", upload_to='banner')
+    price = models.IntegerField('قیمت (ریال)', null=True, blank=True)
     tags = TaggableManager('تگ ها')
     time = models.CharField("تایم ویدیو", blank=True, null=True, max_length=15)
     likes_count = models.BigIntegerField("تعداد لایک ها", default=0)
