@@ -1,6 +1,7 @@
 from django.shortcuts import *
 from django.views import *
 from video.models import *
+from .cart import Cart
 
 
 class CartDetailView(View):
@@ -13,5 +14,6 @@ class CartDetailView(View):
 class CartAddView(View):
     def post(self, req, pk):
         video = get_object_or_404(Video, id=pk)
-        print(video.title, video.price)
+        cart = Cart(req)
+        cart.add(video)
         return redirect('payment:cart-detail')
