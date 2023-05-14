@@ -26,5 +26,10 @@ class Cart:
             item['total'] = int(item['quantity']) * int(item['price'])
             yield item
 
+    def delete(self, pk):
+        if pk in self.cart:
+            del self.cart[pk]
+            self.save()
+
     def save(self):
         self.session.modified = True

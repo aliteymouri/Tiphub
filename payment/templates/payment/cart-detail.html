@@ -23,7 +23,7 @@
                     </div>
                     <div class="d-flex align-items-center">
                         <p class="mx-2 font14 color6464 dana-regular">{{ item.price }} تومان</p>
-                        <button class="bg-danger text-white px-3 py-1 rounded">حذف</button>
+                        <a href="{% url 'payment:cart-del' item.id %}" class="bg-danger text-white px-3 py-1 rounded">حذف</a>
                     </div>
                 </div>
             {% endfor %}
