@@ -19,3 +19,10 @@ class Order(models.Model):
         verbose_name = 'سفارش'
         verbose_name_plural = 'سفارش ها'
         ordering = ('-created_at',)
+
+class OrderItem(models.Model):
+    order = models.ForeignKey(Order, on_delete=models.CASCADE, related_name='items')
+    video = models.ForeignKey(Video, on_delete=models.CASCADE, related_name='items')
+
+    def __str__(self):
+        return self.order.user
