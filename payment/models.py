@@ -8,6 +8,7 @@ from video.models import *
 class Order(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='orders')
     is_paid = models.BooleanField(default=False)
+    total_price = models.PositiveIntegerField(default=0)
     created_at = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
@@ -22,6 +23,7 @@ class Order(models.Model):
 class OrderItem(models.Model):
     order = models.ForeignKey(Order, on_delete=models.CASCADE, related_name='items')
     video = models.ForeignKey(Video, on_delete=models.CASCADE, related_name='items')
+    price = models.PositiveIntegerField()
 
     def __str__(self):
         return self.video.title
