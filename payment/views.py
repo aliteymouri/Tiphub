@@ -1,7 +1,7 @@
 from django.shortcuts import *
 from django.views import *
-from video.models import *
 from .cart import Cart
+from .models import *
 
 
 class CartDetailView(View):
@@ -23,4 +23,13 @@ class CartDeleteView(View):
     def get(self, request, pk):
         cart = Cart(request)
         cart.delete(pk)
+        return redirect('payment:cart-detail')
+
+
+class OrderCreationView(View):
+    def get(self, request):
+        cart = Cart(request)
+        order = Order.objects.create(user=request.user)
+        for item in cart:
+            OrderItem.objects.create(order=order, video=item['video'])
         return redirect('payment:cart-detail')
