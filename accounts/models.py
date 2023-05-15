@@ -25,7 +25,7 @@ class User(AbstractBaseUser, PermissionsMixin):
     REQUIRED_FIELDS = ['fullname', 'phone']
 
     def __str__(self):
-        return F" کاربر : {self.fullname}"
+        return F" کاربر : {self.phone}"
 
     def get_jalali_date(self):
         return JalaliDate(self.date_joined, locale=('fa')).strftime('%c')
