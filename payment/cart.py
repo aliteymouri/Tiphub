@@ -33,6 +33,9 @@ class Cart:
             total += int(item['quantity']) * int(item['price'])
         return total
 
+    def del_cart(self):
+        del self.session[CART_SESSION_ID]
+
     def delete(self, pk):
         if pk in self.cart:
             del self.cart[pk]

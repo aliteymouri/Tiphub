@@ -29,7 +29,8 @@ class CartDeleteView(View):
 class OrderCreationView(View):
     def get(self, request):
         cart = Cart(request)
-        order = Order.objects.create(user=request.user,total_price=cart.total())
+        order = Order.objects.create(user=request.user, total_price=cart.total())
         for item in cart:
-            OrderItem.objects.create(order=order, video=item['video'],price=item['price'])
+            OrderItem.objects.create(order=order, video=item['video'], price=item['price'])
+        cart.del_cart()
         return redirect('payment:cart-detail')

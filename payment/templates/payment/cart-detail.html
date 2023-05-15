@@ -13,7 +13,10 @@
         <div class="container">
             <a href="" class="custom-btn d-inline-flex my-3 p-3 text-white">لیست
                 تراکنش های قبلی</a>
-            <p class="my-3">سفارش شما</p>
+
+            {% if cart.total %}
+                <p class="my-3">سفارش شما</p>
+            {% endif %}
 
             {% for item in cart %}
                 <div class="custom-bg d-flex align-items-center justify-content-between px-4 py-3 my-3 buy-item">
@@ -31,27 +34,30 @@
 
             <div class="row">
                 <div class="col-12">
-                    <div class="custom-bg my-3 p-3">
-                        <div class="pb-2 border-bottom">
-                            <div>
-                                <span>تخفیف:</span>
-                                <span class="dana-regular">0تومان</span>
-                            </div>
-                            {% if cart.total %}
+                    {% if cart.total %}
+                        <div class="custom-bg my-3 p-3">
+                            <div class="pb-2 border-bottom">
                                 <div>
-                                    <span>مبلغ کل به ریال :</span>
-                                    <span class="dana-regular">{{ cart.total }} ریال</span>
+                                    <span>تخفیف:</span>
+                                    <span class="dana-regular">0 تومان</span>
                                 </div>
-                            {% endif %}
+                                {% if cart.total %}
+                                    <div>
+                                        <span>مبلغ کل به ریال :</span>
+                                        <span class="dana-regular">{{ cart.total }} ریال</span>
+                                    </div>
+                                {% endif %}
+                            </div>
+
+
+                            <div class="d-flex align-items-center justify-content-center">
+                                <a href="{% url 'payment:order-creation' %}" class="w-100 btn custom-btn">پرداخت</a>
+                            </div>
+
                         </div>
-
-
-                        <div class="d-flex align-items-center justify-content-center">
-                            <a href="{% url 'payment:order-creation' %}" class="w-100 btn custom-btn">پرداخت</a>
-                        </div>
-
-                    </div>
-
+                    {% else %}
+                        <p class="btn buy-video-btn w-100 my-4">سبد خرید شما در حال حاضر خالی میباشد</p>
+                    {% endif %}
                 </div>
             </div>
         </div>
