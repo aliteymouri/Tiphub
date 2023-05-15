@@ -26,6 +26,13 @@ class Cart:
             item['total'] = int(item['quantity']) * int(item['price'])
             yield item
 
+    def total(self):
+        cart = self.cart.values()
+        total = 0
+        for item in cart:
+            total += int(item['quantity']) * int(item['price'])
+        return total
+
     def delete(self, pk):
         if pk in self.cart:
             del self.cart[pk]

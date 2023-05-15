@@ -37,10 +37,12 @@
                                 <span>تخفیف:</span>
                                 <span class="dana-regular">0تومان</span>
                             </div>
-                            <div>
-                                <span>مبلغ کل به ریال :</span>
-                                <span class="dana-regular">75000تومان</span>
-                            </div>
+                            {% if cart.total %}
+                                <div>
+                                    <span>مبلغ کل به ریال :</span>
+                                    <span class="dana-regular">{{ cart.total }} ریال</span>
+                                </div>
+                            {% endif %}
                         </div>
 
 
