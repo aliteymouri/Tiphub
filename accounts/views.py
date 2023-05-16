@@ -30,6 +30,9 @@ class SignInView(AuthenticatedMixin, View):
             user = authenticate(username=form.cleaned_data['email'], password=form.cleaned_data['password'])
             if user is not None:
                 login(req, user)
+                next_url = self.request.GET.get('next')
+                if next_url:
+                    return redirect(next_url)
                 return redirect('account:user_panel')
             else:
                 form.add_error('email', 'ایمیل یا گذرواژه وارد شده صحیح نمیباشد.')

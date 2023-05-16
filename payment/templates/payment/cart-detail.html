@@ -49,10 +49,14 @@
                                 {% endif %}
                             </div>
 
-
-                            <div class="d-flex align-items-center justify-content-center">
-                                <a href="{% url 'payment:order-creation' %}" class="w-100 btn custom-btn">پرداخت</a>
-                            </div>
+                            {% if request.user.is_authenticated %}
+                                <div class="d-flex align-items-center justify-content-center">
+                                    <a href="{% url 'payment:order-creation' %}" class="w-100 btn custom-btn">پرداخت</a>
+                                </div>
+                            {% else %}
+                                <a href="{% url 'account:sign_in' %}?next={% url 'payment:cart-detail' %}"
+                                   class="btn buy-video-btn w-100 my-4"> لطفا قبل از پرداخت وارد حساب کاربری خود شوید </a>
+                            {% endif %}
 
                         </div>
                     {% else %}
