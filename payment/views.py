@@ -33,4 +33,10 @@ class OrderCreationView(View):
         for item in cart:
             OrderItem.objects.create(order=order, video=item['video'], price=item['price'])
         cart.del_cart()
-        return redirect('payment:cart-detail')
+        return redirect('payment:order-detail', order.id)
+
+
+class OrderDetailView(View):
+    def get(self, request, pk):
+        order = get_object_or_404(Order, id=pk)
+        return render(request, 'payment/order-detail.html', {'order': order})
