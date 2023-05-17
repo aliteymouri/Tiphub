@@ -8,4 +8,5 @@ urlpatterns = [
     path('del/<str:pk>', views.CartDeleteView.as_view(), name='cart-del'),
     path('order/creation', views.OrderCreationView.as_view(), name='order-creation'),
     path('order/<int:pk>', views.OrderDetailView.as_view(), name='order-detail'),
+    path('sendrequest/<int:pk>', views.SendRequestView.as_view(), name='send-request'),
 ]

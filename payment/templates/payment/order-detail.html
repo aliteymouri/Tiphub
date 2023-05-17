@@ -3,7 +3,7 @@
 
 
 {% block title %}
-   تکمیل سفارش و پرداخت
+    تکمیل سفارش و پرداخت
 {% endblock %}
 
 
@@ -32,27 +32,30 @@
             <div class="row">
                 <div class="col-12">
                     {% if order.total_price %}
-                        <div class="custom-bg my-3 p-3">
-                            <div class="pb-2 border-bottom">
-                                <div>
-                                    <span>تخفیف:</span>
-                                    <span class="dana-regular">0 تومان</span>
-                                </div>
-                                {% if order.total_price %}
+                        <form action="{% url 'payment:send-request' order.id %}" method="post">
+                            {% csrf_token %}
+                            <div class="custom-bg my-3 p-3">
+                                <div class="pb-2 border-bottom">
                                     <div>
-                                        <span>مبلغ کل به ریال :</span>
-                                        <span class="dana-regular">{{ order.total_price }} ریال</span>
+                                        <span>تخفیف:</span>
+                                        <span class="dana-regular">0 تومان</span>
                                     </div>
-                                {% endif %}
+                                    {% if order.total_price %}
+                                        <div>
+                                            <span>مبلغ کل به ریال :</span>
+                                            <span class="dana-regular">{{ order.total_price }} ریال</span>
+                                        </div>
+                                    {% endif %}
+                                </div>
+
+
+                                <div class="d-flex align-items-center justify-content-center">
+                                    <button type="submit" class="w-100 btn custom-btn">پرداخت</button>
+                                </div>
+
+
                             </div>
-
-
-                            <div class="d-flex align-items-center justify-content-center">
-                                <a href="#" class="w-100 btn custom-btn">پرداخت</a>
-                            </div>
-
-
-                        </div>
+                        </form>
                     {% endif %}
                 </div>
             </div>

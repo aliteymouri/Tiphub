@@ -183,3 +183,7 @@ CKEDITOR_CONFIGS = {
         'toolbar': 'full',
     },
 }
+
+MERCHANT = "d42bcac9-7e1a-48d1-98c9-e6e38365c55b"
+
+SANDBOX = False
