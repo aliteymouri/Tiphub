@@ -1,5 +1,5 @@
+from django.views.generic import *
 from django.shortcuts import *
-from django.views import *
 from .cart import Cart
 from .models import *
 import requests
@@ -54,12 +54,13 @@ description = "توضیحات مربوط به تراکنش را در این قس
 email = 'email@example.com'  # Optional
 mobile = '09123456789'  # Optional
 # Important: need to edit for realy server.
-CallbackURL = "http://127.0.0.1:8000/verify/"
+CallbackURL = "http://127.0.0.1:8000/payment/verify/"
 
 
 class SendRequestView(View):
     def post(self, request, pk):
         order = get_object_or_404(Order, id=pk)
+        request.session['order_id'] = str(order.id)
         req_data = {
             "merchant_id": MERCHANT,
             "amount": order.total_price,
@@ -83,3 +84,40 @@ class SendRequestView(View):
             e_code = req.json()['errors']['code']
             e_message = req.json()['errors']['message']
             return HttpResponse(f"Error code: {e_code}, Error Message: {e_message}")
+
+
+class VerifyView(View):
+    def get(self, request):
+        t_status = request.GET.get('Status')
+        t_authority = request.GET['Authority']
+        order_id = request.session['order_id']
+        order = Order.objects.get(id=int(order_id))
+        if request.GET.get('Status') == 'OK':
+            req_header = {"accept": "application/json",
+                          "content-type": "application/json'"}
+            req_data = {
+                "merchant_id": MERCHANT,
+                "amount": order.total_price,
+                "authority": t_authority
+            }
+            req = requests.post(url=ZP_API_VERIFY, data=json.dumps(req_data), headers=req_header)
+            if len(req.json()['errors']) == 0:
+                t_status = req.json()['data']['code']
+                if t_status == 100:
+                    order.is_paid = True  # transaction success
+                    order.save()
+                    return HttpResponse('ok')  # you can render a template to show success transaction
+                elif t_status == 101:
+                    return HttpResponse('Transaction submitted : ' + str(
+                        req.json()['data']['message']
+                    ))
+                else:
+                    return HttpResponse('Transaction failed.\nStatus: ' + str(
+                        req.json()['data']['message']
+                    ))
+            else:
+                e_code = req.json()['errors']['code']
+                e_message = req.json()['errors']['message']
+                return HttpResponse(f"Error code: {e_code}, Error Message: {e_message}")
+        else:
+            return redirect('home:home')
