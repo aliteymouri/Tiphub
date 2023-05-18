@@ -9,5 +9,5 @@ urlpatterns = [
     path('order/creation', views.OrderCreationView.as_view(), name='order-creation'),
     path('order/<int:pk>', views.OrderDetailView.as_view(), name='order-detail'),
     path('sendrequest/<int:pk>', views.SendRequestView.as_view(), name='send-request'),
-    path('verify-request', views.VerifyView.as_view(), name='verify-request'),
+    path('verify/', views.VerifyView.as_view(), name='verify-request'),
 ]
